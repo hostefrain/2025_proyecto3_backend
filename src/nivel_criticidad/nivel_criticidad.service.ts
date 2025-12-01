@@ -6,29 +6,46 @@ import type { INivelCriticidadRepository } from './INivel_criticidadRepository';
 @Injectable()
 export class NivelCriticidadService {
   private readonly logger = new Logger(NivelCriticidadService.name);
+  private readonly ENTITY_NAME = 'NivelCriticidad';
 
   constructor(
     @Inject('INivelCriticidadRepository') 
     private readonly nivelCriticidadRepository: INivelCriticidadRepository,
   ) {}
   
-  create(createNivelCriticidadDto: CreateNivelCriticidadDto) {
-    return 'This action adds a new nivelCriticidad';
+  async create(createNivelCriticidadDto: CreateNivelCriticidadDto) {
+    this.logger.log(`Creando un nuevo ${createNivelCriticidadDto.nombre} con nombre: ${createNivelCriticidadDto.nombre}`, );
+    await this.validarExisteNombre (createNivelCriticidadDto.nombre);
+    const entity = await this.nivelCriticidadRepository.create(createNivelCriticidadDto);
+    return entity
   }
 
-  findAll() {
-    return `This action returns all nivelCriticidad`;
+  async findAll() {
+    this.logger.log(`Buscando ${this.ENTITY_NAME}s`, );
+    return this.nivelCriticidadRepository.findAll();
   }
 
-  findOne(id: number) {
+  async findOne(id: string) {
     return `This action returns a #${id} nivelCriticidad`;
   }
 
-  update(id: number, updateNivelCriticidadDto: UpdateNivelCriticidadDto) {
-    return `This action updates a #${id} nivelCriticidad`;
+  async update(id: string, updateNivelCriticidadDto: UpdateNivelCriticidadDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    await this.nivelCriticidadRepository.findOne(id);
+    const entity = await this.nivelCriticidadRepository.update(id, updateNivelCriticidadDto);
+    return entity;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} nivelCriticidad`;
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    return this.nivelCriticidadRepository.remove(id);
+  }
+
+  private async validarExisteNombre(nombre: string): Promise<void> {
+    const existingTipoReclamo = await this.nivelCriticidadRepository.findByName(nombre);
+    if (existingTipoReclamo) {
+      this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new Error(`El nombre ${nombre} ya existe.`);
+    }
   }
 }

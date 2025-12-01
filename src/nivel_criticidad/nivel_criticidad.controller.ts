@@ -19,16 +19,16 @@ export class NivelCriticidadController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.nivelCriticidadService.findOne(+id);
+    return this.nivelCriticidadService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateNivelCriticidadDto: UpdateNivelCriticidadDto) {
-    return this.nivelCriticidadService.update(+id, updateNivelCriticidadDto);
+    return this.nivelCriticidadService.update(id, updateNivelCriticidadDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.nivelCriticidadService.remove(+id);
+    return this.nivelCriticidadService.remove(id);
   }
 }
