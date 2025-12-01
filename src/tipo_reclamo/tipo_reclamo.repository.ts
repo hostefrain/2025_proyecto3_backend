@@ -1,4 +1,4 @@
-import { Inject, Logger } from "@nestjs/common";
+import { InternalServerErrorException, Logger } from "@nestjs/common";
 import { ITipoReclamoRepository } from "./ITipo_reclamoRepository";
 import { CreateTipoReclamoDto } from "./dto/create-tipo_reclamo.dto";
 import { TipoReclamo, TipoReclamoDocument } from "./schema/tipo_reclamo.schema";
@@ -16,23 +16,59 @@ export class TipoReclamoRepository implements ITipoReclamoRepository{
     ) {}
 
     async create(data: CreateTipoReclamoDto): Promise<TipoReclamo> {
-        const createdTipoReclamo = new this.tipoReclamoModel(data);
-        return createdTipoReclamo.save();
+        try {
+            const nueva = new this.tipoReclamoModel(data);
+            return await nueva.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el TipoReclamo');
+        }
     }
 
-    async findOne(id: string): Promise<TipoReclamo | null> {
-        return this.tipoReclamoModel.findById(id).exec();
+
+    async findByName(nombre: string): Promise<TipoReclamo | null> {
+        try {
+            return this.tipoReclamoModel.findOne({ nombre }).exec();
+        }catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el TipoReclamo');
+        }
+    }
+
+    async findById(id: string): Promise<TipoReclamo | null> {
+        try {
+            return this.tipoReclamoModel.findOne({ id }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el TipoReclamo');
+        }
     }
 
     async findAll(): Promise<TipoReclamo[]> {
-        return this.tipoReclamoModel.find().exec();
+        try {
+            return this.tipoReclamoModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los TipoReclamos');
+        }
     }
 
     async update(id: string, data: UpdateTipoReclamoDto): Promise<TipoReclamo | null> {
+        try {
         return this.tipoReclamoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+        this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+        throw new InternalServerErrorException('Error al actualizar el TipoReclamo');
+        }
     }
 
     async remove(id: string): Promise<void> {
-        await this.tipoReclamoModel.findByIdAndDelete(id).exec();
+        try {
+            await this.tipoReclamoModel.findOneAndDelete({ _id: id }).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el TipoReclamo');
+        }
     }
+
 }

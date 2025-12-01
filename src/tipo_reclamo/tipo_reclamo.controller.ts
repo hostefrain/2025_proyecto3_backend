@@ -19,16 +19,16 @@ export class TipoReclamoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.tipoReclamoService.findOne(+id);
+    return this.tipoReclamoService.findById(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTipoReclamoDto: UpdateTipoReclamoDto) {
-    return this.tipoReclamoService.update(+id, updateTipoReclamoDto);
+    return this.tipoReclamoService.update(id, updateTipoReclamoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.tipoReclamoService.remove(+id);
+    return this.tipoReclamoService.remove(id);
   }
 }
