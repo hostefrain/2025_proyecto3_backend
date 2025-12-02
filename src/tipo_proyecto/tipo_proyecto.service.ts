@@ -6,29 +6,50 @@ import type { ITipo_proyectoRepository } from './ITipo_proyectoRepository';
 @Injectable()
 export class TipoProyectoService {
   private readonly logger = new Logger(TipoProyectoService.name);
+  private readonly ENTITY_NAME = 'TipoProyecto';
 
   constructor(
     @Inject('ITipoProyectoRepository')
     private readonly tipoProyectoRepository: ITipo_proyectoRepository,
   ) {}
   
-  create(createTipoProyectoDto: CreateTipoProyectoDto) {
-    return 'This action adds a new tipoProyecto';
+  async create(createTipoProyectoDto: CreateTipoProyectoDto) {
+    this.logger.log(`Creando un nuevo ${this.ENTITY_NAME} con nombre ${createTipoProyectoDto.nombre}`, );
+    await this.validarExisteNombre (createTipoProyectoDto.nombre);
+    const entity = await this.tipoProyectoRepository.create(createTipoProyectoDto);
+    return entity;
   }
 
-  findAll() {
-    return `This action returns all tipoProyecto`;
+  async findAll() {
+    this.logger.log(`Buscando ${this.ENTITY_NAME}s`, );
+    const entities = await this.tipoProyectoRepository.findAll();
+    return entities;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tipoProyecto`;
+  async findById(id: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`, );
+    const entity =  await this.tipoProyectoRepository.findByID(id);
+    return entity;
   }
 
-  update(id: number, updateTipoProyectoDto: UpdateTipoProyectoDto) {
-    return `This action updates a #${id} tipoProyecto`;
+  async update(id: string, updateTipoProyectoDto: UpdateTipoProyectoDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    await this.findById(id);
+    const entity = await this.tipoProyectoRepository.update(id, updateTipoProyectoDto);
+    return entity;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tipoProyecto`;
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    return this.tipoProyectoRepository.remove(id);
   }
+
+  private async validarExisteNombre(nombre: string): Promise<void> {
+    const existingTipoReclamo = await this.tipoProyectoRepository.findByName(nombre);
+    if (existingTipoReclamo) {
+      this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new Error(`El nombre ${nombre} ya existe.`);
+  }
+
+}
 }
