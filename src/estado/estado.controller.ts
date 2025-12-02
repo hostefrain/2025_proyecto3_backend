@@ -19,16 +19,16 @@ export class EstadoController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.estadoService.findOne(+id);
+    return this.estadoService.findById(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEstadoDto: UpdateEstadoDto) {
-    return this.estadoService.update(+id, updateEstadoDto);
+    return this.estadoService.update(id, updateEstadoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.estadoService.remove(+id);
+    return this.estadoService.remove(id);
   }
 }

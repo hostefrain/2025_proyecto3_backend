@@ -55,7 +55,7 @@ export class TipoReclamoRepository implements ITipoReclamoRepository{
 
     async update(id: string, data: UpdateTipoReclamoDto): Promise<TipoReclamo | null> {
         try {
-        return this.tipoReclamoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+            return this.tipoReclamoModel.findByIdAndUpdate(id, data, { new: true }).exec();
         } catch (error) {
         this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
         throw new InternalServerErrorException('Error al actualizar el TipoReclamo');
