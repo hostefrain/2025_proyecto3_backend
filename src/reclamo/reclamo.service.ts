@@ -1,7 +1,8 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { CreateReclamoDto } from './dto/create-reclamo.dto';
 import { UpdateReclamoDto } from './dto/update-reclamo.dto';
 import type { IReclamoRepository } from './IReclamoRepository';
+import { TipoReclamoService } from 'src/tipo_reclamo/tipo_reclamo.service';
 
 @Injectable()
 export class ReclamoService {
@@ -12,23 +13,19 @@ export class ReclamoService {
     private readonly reclamoRepository: IReclamoRepository,
   ) {}
 
-  create(createReclamoDto: CreateReclamoDto) {
-    return 'This action adds a new reclamo';
+  async create(createReclamoDto: CreateReclamoDto) {}
+
+  async findAll() {
+    return this.reclamoRepository.findAll();
   }
 
-  findAll() {
-    return `This action returns all reclamo`;
+  async findOne(id: string) {
+    return this.reclamoRepository.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reclamo`;
+  async update(id: string, updateReclamoDto: UpdateReclamoDto) {
   }
 
-  update(id: number, updateReclamoDto: UpdateReclamoDto) {
-    return `This action updates a #${id} reclamo`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} reclamo`;
+  async remove(id: string) {
   }
 }

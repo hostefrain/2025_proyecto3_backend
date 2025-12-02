@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Proyecto, ProyectoDocument } from "./schema/proyecto.schema";
 import { Model } from "mongoose";
@@ -17,24 +17,58 @@ export class ProyectoRepository implements IProyectoRepository {
     ) {}
 
     async create(data: CreateProyectoDto): Promise<Proyecto> {
-        const createdProyecto = new this.proyectoModel(data);
-        return createdProyecto.save();
+        try {
+            const createdProyecto = new this.proyectoModel(data);
+            return createdProyecto.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el Proyecto');
+        }
     }
 
     async findOne(id: string): Promise<Proyecto | null> {
-        return this.proyectoModel.findById(id).exec();
+        try {
+            return this.proyectoModel.findById(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Proyecto');
+        }
+    }
+
+    async findByName(nombre: string): Promise<Proyecto | null> {
+        try {
+            return this.proyectoModel.findOne({ nombre }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Proyecto');
+        }
     }
 
     async findAll(): Promise<Proyecto[]> {
-        return this.proyectoModel.find().exec();
+        try {
+            return this.proyectoModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los Proyectos');
+        }
     }
 
     async update(id: string, data: UpdateProyectoDto): Promise<Proyecto | null> {
-        return this.proyectoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        try {
+            return this.proyectoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar el Proyecto');
+        }
     }
 
     async remove(id: string): Promise<void> {
-        await this.proyectoModel.findByIdAndDelete(id).exec();
+        try {
+            await this.proyectoModel.findByIdAndDelete(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el Proyecto');
+        }
     }
 
 }

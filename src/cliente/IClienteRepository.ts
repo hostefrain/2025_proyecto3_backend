@@ -4,7 +4,8 @@ import { Cliente } from "./schemas/cliente.schema";
 
 export interface IClienteRepository {
     create(data: CreateClienteDto) : Promise<Cliente>;
-    findOne(id: string) : Promise<Cliente | null>;
+    findById(id: string) : Promise<Cliente | null>;
+    findByName(nombre: string) : Promise <Cliente | null>
     findAll() : Promise<Cliente[]>;
     update(id: string, data: UpdateClienteDto) : Promise<Cliente | null>;
     remove(id: string) : Promise<void>;
