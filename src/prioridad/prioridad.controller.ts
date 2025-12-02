@@ -19,16 +19,16 @@ export class PrioridadController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.prioridadService.findOne(+id);
+    return this.prioridadService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePrioridadDto: UpdatePrioridadDto) {
-    return this.prioridadService.update(+id, updatePrioridadDto);
+    return this.prioridadService.update(id, updatePrioridadDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.prioridadService.remove(+id);
+    return this.prioridadService.remove(id);
   }
 }

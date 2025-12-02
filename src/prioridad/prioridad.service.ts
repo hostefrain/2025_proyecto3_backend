@@ -6,29 +6,30 @@ import type { IPrioridadRepository } from './IPrioridadRepository';
 @Injectable()
 export class PrioridadService {
   private readonly logger = new Logger(PrioridadService.name);
+  private readonly ENTITY_NAME = 'Prioridad';
 
   constructor(
     @Inject('IPrioridadRepository')
     private readonly prioridadRepository: IPrioridadRepository,
   ) {}
-  
-  create(createPrioridadDto: CreatePrioridadDto) {
-    return 'This action adds a new prioridad';
+
+  async create(createPrioridadDto: CreatePrioridadDto) {
+    return this.prioridadRepository.create(createPrioridadDto);
   }
 
-  findAll() {
-    return `This action returns all prioridad`;
+  async findAll() {
+    return this.prioridadRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} prioridad`;
+  async findOne(id: string) {
+    return this.prioridadRepository.findOne(id);
   }
 
-  update(id: number, updatePrioridadDto: UpdatePrioridadDto) {
-    return `This action updates a #${id} prioridad`;
+  async update(nombre: string, updatePrioridadDto: UpdatePrioridadDto) {
+    return this.prioridadRepository.update(nombre, updatePrioridadDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} prioridad`;
+  async remove(id: string) {
+    return this.prioridadRepository.remove(id);
   }
 }
