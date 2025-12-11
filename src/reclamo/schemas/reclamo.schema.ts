@@ -31,9 +31,6 @@ export class Reclamo {
   @Prop({ type: Types.ObjectId, ref: 'Estado', required: true })
   estadoId: Types.ObjectId;
 
-  // Acciones del Reclamo (1 -> *)
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Accion' }] })
-  acciones: Types.ObjectId[];
 }
 
 export const ReclamoSchema = SchemaFactory.createForClass(Reclamo);

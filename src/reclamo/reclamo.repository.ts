@@ -4,6 +4,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Reclamo } from "./schemas/reclamo.schema";
 import { Model } from "mongoose";
 import { CreateReclamoDto } from "./dto/create-reclamo.dto";
+import { UpdateReclamoDto } from "./dto/update-reclamo.dto";
 
 @Injectable()
 export class ReclamoRepository implements IReclamoRepository{
@@ -34,15 +35,6 @@ export class ReclamoRepository implements IReclamoRepository{
         }
     }
 
-    async findByName(nombre: string): Promise<Reclamo | null> {
-        try {
-            return this.reclamoModel.findOne({ nombre }).exec();
-        } catch (error) {
-            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
-            throw new InternalServerErrorException('Error al buscar el Reclamo');
-        }
-    }
-
     async findAll(): Promise<Reclamo[]> {
         try {
             return this.reclamoModel.find().exec();
@@ -52,7 +44,7 @@ export class ReclamoRepository implements IReclamoRepository{
         }
     }
 
-    async update(id: string, data: CreateReclamoDto): Promise<Reclamo | null> {
+    async update(id: string, data: UpdateReclamoDto): Promise<Reclamo | null> {
         try {
             return this.reclamoModel.findByIdAndUpdate(id, data, { new: true }).exec();
         } catch (error) {

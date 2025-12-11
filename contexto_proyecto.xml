@@ -1,0 +1,4086 @@
+<project_structure>
+2025_proyecto3_backend-main/
+  nest-cli.json
+  package.json
+  README.md
+  tsconfig.build.json
+  tsconfig.json
+  src/
+    app.controller.spec.ts
+    app.controller.ts
+    app.module.ts
+    app.service.ts
+    main.ts
+    accion/
+      accion.controller.spec.ts
+      accion.controller.ts
+      accion.module.ts
+      accion.repository.ts
+      accion.service.spec.ts
+      accion.service.ts
+      IAccionRepository.ts
+      dto/
+        create-accion.dto.ts
+        update-accion.dto.ts
+      schemas/
+        accion.schema.ts
+    area/
+      area.controller.spec.ts
+      area.controller.ts
+      area.module.ts
+      area.repository.ts
+      area.service.spec.ts
+      area.service.ts
+      IAreaRepository.ts
+      dto/
+        create-area.dto.ts
+        update-area.dto.ts
+      schemas/
+        area.schema.ts
+    cliente/
+      cliente.controller.spec.ts
+      cliente.controller.ts
+      cliente.module.ts
+      cliente.repository.ts
+      cliente.service.spec.ts
+      cliente.service.ts
+      IClienteRepository.ts
+      dto/
+        create-cliente.dto.ts
+        update-cliente.dto.ts
+      schemas/
+        cliente.schema.ts
+    estado/
+      estado.controller.spec.ts
+      estado.controller.ts
+      estado.module.ts
+      estado.repository.ts
+      estado.service.spec.ts
+      estado.service.ts
+      IEstadoRepository.ts
+      dto/
+        create-estado.dto.ts
+        update-estado.dto.ts
+      schemas/
+        estado.schema.ts
+    nivel_criticidad/
+      INivel_criticidadRepository.ts
+      nivel_criticidad.controller.spec.ts
+      nivel_criticidad.controller.ts
+      nivel_criticidad.module.ts
+      nivel_criticidad.repository.ts
+      nivel_criticidad.service.spec.ts
+      nivel_criticidad.service.ts
+      dto/
+        create-nivel_criticidad.dto.ts
+        update-nivel_criticidad.dto.ts
+      schemas/
+        nivel_criticidad.schema.ts
+    prioridad/
+      IPrioridadRepository.ts
+      prioridad.controller.spec.ts
+      prioridad.controller.ts
+      prioridad.module.ts
+      prioridad.repository.ts
+      prioridad.service.spec.ts
+      prioridad.service.ts
+      dto/
+        create-prioridad.dto.ts
+        update-prioridad.dto.ts
+      schemas/
+        prioridad.schema.ts
+    proyecto/
+      IProyectoRepository.ts
+      proyecto.controller.spec.ts
+      proyecto.controller.ts
+      proyecto.module.ts
+      proyecto.repository.ts
+      proyecto.service.spec.ts
+      proyecto.service.ts
+      dto/
+        create-proyecto.dto.ts
+        update-proyecto.dto.ts
+      schema/
+        proyecto.schema.ts
+    reclamo/
+      IReclamoRepository.ts
+      reclamo.controller.spec.ts
+      reclamo.controller.ts
+      reclamo.module.ts
+      reclamo.repository.ts
+      reclamo.service.spec.ts
+      reclamo.service.ts
+      dto/
+        create-reclamo.dto.ts
+        update-reclamo.dto.ts
+      schemas/
+        reclamo.schema.ts
+    rol/
+      IRolRepository.ts
+      rol.controller.spec.ts
+      rol.controller.ts
+      rol.module.ts
+      rol.repository.ts
+      rol.service.spec.ts
+      rol.service.ts
+      dto/
+        create-rol.dto.ts
+        update-rol.dto.ts
+      schema/
+        rol.schema.ts
+    tipo_proyecto/
+      ITipo_proyectoRepository.ts
+      tipo_proyecto.controller.spec.ts
+      tipo_proyecto.controller.ts
+      tipo_proyecto.module.ts
+      tipo_proyecto.repository.ts
+      tipo_proyecto.service.spec.ts
+      tipo_proyecto.service.ts
+      dto/
+        create-tipo_proyecto.dto.ts
+        update-tipo_proyecto.dto.ts
+      schema/
+        tipo_proyecto.schema.ts
+    tipo_reclamo/
+      ITipo_reclamoRepository.ts
+      tipo_reclamo.controller.spec.ts
+      tipo_reclamo.controller.ts
+      tipo_reclamo.module.ts
+      tipo_reclamo.repository.ts
+      tipo_reclamo.service.spec.ts
+      tipo_reclamo.service.ts
+      dto/
+        create-tipo_reclamo.dto.ts
+        tipo_reclamo.dto.ts
+        update-tipo_reclamo.dto.ts
+      schema/
+        tipo_reclamo.schema.ts
+    usuario/
+      IUsuarioRepository.ts
+      usuario.controller.spec.ts
+      usuario.controller.ts
+      usuario.module.ts
+      usuario.repository.ts
+      usuario.service.spec.ts
+      usuario.service.ts
+      dto/
+        create-usuario.dto.ts
+        update-usuario.dto.ts
+      schema/
+        usuario.schema.ts
+  test/
+    app.e2e-spec.ts
+    jest-e2e.json
+</project_structure>
+
+<file path="nest-cli.json">
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true
+  }
+}
+
+</file>
+
+<file path="package.json">
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.9",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^11.1.9",
+    "@nestjs/mapped-types": "*",
+    "@nestjs/mongoose": "^11.0.3",
+    "@nestjs/platform-express": "^11.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
+    "mongodb": "^7.0.0",
+    "mongoose": "^8.20.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.18.0",
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@nestjs/testing": "^11.0.1",
+    "@types/express": "^5.0.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.10.7",
+    "@types/supertest": "^6.0.2",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.2",
+    "globals": "^16.0.0",
+    "jest": "^30.0.0",
+    "prettier": "^3.4.2",
+    "source-map-support": "^0.5.21",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
+
+</file>
+
+<file path="README.md">
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
+
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token: [REDACTED]
+[circleci-url]: https://circleci.com/gh/nestjs/nest
+
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+
+## Description
+
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+## Project setup
+
+```bash
+$ npm install
+```
+
+## Compile and run the project
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Run tests
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Deployment
+
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+
+```bash
+$ npm install -g @nestjs/mau
+$ mau deploy
+```
+
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+
+## Resources
+
+Check out a few resources that may come in handy when working with NestJS:
+
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+</file>
+
+<file path="tsconfig.build.json">
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+}
+
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false
+  }
+}
+
+</file>
+
+<file path="src\app.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+describe('AppController', () => {
+  let appController: AppController;
+
+  beforeEach(async () => {
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+      providers: [AppService],
+    }).compile();
+
+    appController = app.get<AppController>(AppController);
+  });
+
+  describe('root', () => {
+    it('should return "Hello World!"', () => {
+      expect(appController.getHello()).toBe('Hello World!');
+    });
+  });
+});
+
+</file>
+
+<file path="src\app.controller.ts">
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
+}
+
+</file>
+
+<file path="src\app.module.ts">
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+
+import { ClienteModule } from './cliente/cliente.module';
+import { ProyectoModule } from './proyecto/proyecto.module';
+import { TipoProyectoModule } from './tipo_proyecto/tipo_proyecto.module';
+import { EstadoModule } from './estado/estado.module';
+import { ReclamoModule } from './reclamo/reclamo.module';
+import { TipoReclamoModule } from './tipo_reclamo/tipo_reclamo.module';
+import { PrioridadModule } from './prioridad/prioridad.module';
+import { NivelCriticidadModule } from './nivel_criticidad/nivel_criticidad.module';
+import { AccionModule } from './accion/accion.module';
+import { AreaModule } from './area/area.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { RolModule } from './rol/rol.module';
+
+@Module({
+  imports: [
+    // 👇 Cargar variables .env globalmente
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
+    // 👇 Conexión a Mongo usando variable de entorno VALIDADA
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        const uri = config.get<string>('MONGODB_URI');
+
+        if (!uri) {
+          throw new Error('La variable de entorno MONGODB_URI no está definida');
+        }
+
+        return {
+          uri,
+        };
+      },
+    }),
+
+    ClienteModule,
+    ProyectoModule,
+    TipoProyectoModule,
+    EstadoModule,
+    ReclamoModule,
+    TipoReclamoModule,
+    PrioridadModule,
+    NivelCriticidadModule,
+    AccionModule,
+    AreaModule,
+    UsuarioModule,
+    RolModule,
+  ],
+})
+export class AppModule {}
+
+</file>
+
+<file path="src\app.service.ts">
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class AppService {
+  getHello(): string {
+    return 'Hello World!';
+  }
+}
+
+</file>
+
+<file path="src\main.ts">
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(process.env.PORT ?? 3000);
+}
+bootstrap();
+
+</file>
+
+<file path="src\accion\accion.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { AccionController } from './accion.controller';
+import { AccionService } from './accion.service';
+
+describe('AccionController', () => {
+  let controller: AccionController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [AccionController],
+      providers: [AccionService],
+    }).compile();
+
+    controller = module.get<AccionController>(AccionController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\accion\accion.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { AccionService } from './accion.service';
+import { CreateAccionDto } from './dto/create-accion.dto';
+import { UpdateAccionDto } from './dto/update-accion.dto';
+
+@Controller('accion')
+export class AccionController {
+  constructor(private readonly accionService: AccionService) {}
+
+  @Post()
+  create(@Body() createAccionDto: CreateAccionDto) {
+    return this.accionService.create(createAccionDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.accionService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.accionService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateAccionDto: UpdateAccionDto) {
+    return this.accionService.update(+id, updateAccionDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.accionService.remove(+id);
+  }
+}
+
+</file>
+
+<file path="src\accion\accion.module.ts">
+import { Module } from '@nestjs/common';
+import { AccionService } from './accion.service';
+import { AccionController } from './accion.controller';
+import { AccionRepository } from './accion.repository';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Accion, AccionSchema } from '../accion/schemas/accion.schema';
+
+
+@Module({
+    imports: [
+    MongooseModule.forFeature([{ name: Accion.name, schema: AccionSchema }])
+  ],
+
+  controllers: [AccionController],
+  providers: [
+    AccionService,
+    {
+      provide: 'IAccionRepository',
+      useClass: AccionRepository,
+    },
+  ],
+  exports: [AccionService],
+})
+export class AccionModule {}
+
+</file>
+
+<file path="src\accion\accion.repository.ts">
+import { Injectable, Logger } from "@nestjs/common";
+import { Accion, AccionDocument } from "./schemas/accion.schema";
+import { InjectModel } from "@nestjs/mongoose";
+import { IAccionRepository } from "./IAccionRepository";
+import { Model } from "mongoose";
+import { UpdateAccionDto } from "./dto/update-accion.dto";
+import { CreateAccionDto } from "./dto/create-accion.dto";
+
+@Injectable()
+export class AccionRepository implements IAccionRepository {
+    private readonly logger = new Logger(AccionRepository.name);
+    private readonly ENTITY_NAME = 'Accion';
+
+    constructor(
+        @InjectModel(Accion.name)
+        private readonly accionModel: Model<AccionDocument>,
+    ) {}
+
+    async create(data: CreateAccionDto): Promise<Accion> {
+        const createdAccion = new this.accionModel(data);
+        return createdAccion.save();
+    }
+
+    async findOne(id: string): Promise<Accion | null> {
+        return this.accionModel.findById(id).exec();
+    }
+
+    async findAll(): Promise<Accion[]> {
+        return this.accionModel.find().exec();
+    }
+
+    async update(id: string, data: UpdateAccionDto): Promise<Accion | null> {
+        return this.accionModel.findByIdAndUpdate(id, data, { new: true }).exec();
+    }
+
+    async remove(id: string): Promise<void> {
+        await this.accionModel.findByIdAndDelete(id).exec();
+    }
+}
+
+
+</file>
+
+<file path="src\accion\accion.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { AccionService } from './accion.service';
+
+describe('AccionService', () => {
+  let service: AccionService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [AccionService],
+    }).compile();
+
+    service = module.get<AccionService>(AccionService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\accion\accion.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateAccionDto } from './dto/create-accion.dto';
+import { UpdateAccionDto } from './dto/update-accion.dto';
+import type { IAccionRepository } from './IAccionRepository';
+
+@Injectable()
+export class AccionService {
+  private readonly logger = new Logger(AccionService.name);
+
+  constructor(
+    @Inject('IAccionRepository') 
+    private readonly accionRepository: IAccionRepository,
+  ) {}
+
+  create(createAccionDto: CreateAccionDto) {
+    return 'This action adds a new accion';
+  }
+
+  findAll() {
+    return `This action returns all accion`;
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} accion`;
+  }
+
+  update(id: number, updateAccionDto: UpdateAccionDto) {
+    return `This action updates a #${id} accion`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} accion`;
+  }
+}
+
+</file>
+
+<file path="src\accion\IAccionRepository.ts">
+import { CreateAccionDto } from "./dto/create-accion.dto";
+import { UpdateAccionDto } from "./dto/update-accion.dto";
+import { Accion } from "./schemas/accion.schema";
+
+export interface IAccionRepository {
+    create(data: CreateAccionDto) : Promise<Accion>;
+    findOne(id: string) : Promise<Accion | null>;
+    findAll() : Promise<Accion[]>;
+    update(id: string, data: UpdateAccionDto) : Promise<Accion | null>;
+    remove(id: string) : Promise<void>;
+}
+
+
+</file>
+
+<file path="src\accion\dto\create-accion.dto.ts">
+export class CreateAccionDto {
+    @IsString()
+    @IsNotEmpty()
+    descripcion: string;
+
+    @IsMongoId()
+    reclamoId: string;
+
+    @IsMongoId()
+    areaOrigenId: string;
+
+    @IsMongoId()
+    areaDestinoId: string;
+
+    @IsMongoId()
+    responsableId: string;
+
+    @IsMongoId()
+    estadoActualId: string;
+
+    @IsMongoId()
+    estadoNuevoId: string;
+}
+</file>
+
+<file path="src\accion\dto\update-accion.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateAccionDto } from './create-accion.dto';
+
+export class UpdateAccionDto extends PartialType(CreateAccionDto) {}
+
+</file>
+
+<file path="src\accion\schemas\accion.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+import { Types } from 'mongoose';
+
+export type AccionDocument = HydratedDocument<Accion>;
+
+@Schema({ timestamps: true })
+export class Accion {
+  @Prop({ required: true })
+  descripcion: string;
+
+  @Prop({ type: Date, required: true, default: Date.now })
+  fecha_hora: Date;
+
+  // Relaciones
+  @Prop({ type: Types.ObjectId, ref: 'Reclamo', required: true })
+  reclamoId: Types.ObjectId;
+
+  @Prop({ type: Types.ObjectId, ref: 'Area', required: true })
+  areaOrigenId: Types.ObjectId;
+
+  @Prop({ type: Types.ObjectId, ref: 'Area', required: true })
+  areaDestinoId: Types.ObjectId;
+
+  @Prop({ type: Types.ObjectId, ref: 'Usuario', required: true })
+  responsableId: Types.ObjectId;
+
+  @Prop({ type: Types.ObjectId, ref: 'Estado', required: true })
+  estadoActualId: Types.ObjectId;
+
+  @Prop({ type: Types.ObjectId, ref: 'Estado', required: true })
+  estadoNuevoId: Types.ObjectId;
+}
+
+export const AccionSchema = SchemaFactory.createForClass(Accion);
+
+</file>
+
+<file path="src\area\area.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { AreaController } from './area.controller';
+import { AreaService } from './area.service';
+
+describe('AreaController', () => {
+  let controller: AreaController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [AreaController],
+      providers: [AreaService],
+    }).compile();
+
+    controller = module.get<AreaController>(AreaController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\area\area.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { AreaService } from './area.service';
+import { CreateAreaDto } from './dto/create-area.dto';
+import { UpdateAreaDto } from './dto/update-area.dto';
+
+@Controller('area')
+export class AreaController {
+  constructor(private readonly areaService: AreaService) {}
+
+  @Post()
+  create(@Body() createAreaDto: CreateAreaDto) {
+    return this.areaService.create(createAreaDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.areaService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.areaService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateAreaDto: UpdateAreaDto) {
+    return this.areaService.update(+id, updateAreaDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.areaService.remove(+id);
+  }
+}
+
+</file>
+
+<file path="src\area\area.module.ts">
+import { Module } from '@nestjs/common';
+import { AreaService } from './area.service';
+import { AreaController } from './area.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Area, AreaSchema } from './schemas/area.schema';
+import { AreaRepository } from './area.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Area.name, schema: AreaSchema }]),
+  ],
+  controllers: [AreaController],
+  providers: [
+    AreaService,
+    {
+      provide: 'IAreaRepository',
+      useClass: AreaRepository,
+    },
+  ],
+  exports: [AreaService],
+})
+export class AreaModule {}
+
+</file>
+
+<file path="src\area\area.repository.ts">
+import { Injectable, Logger } from "@nestjs/common";
+import { IAreaRepository } from "./IAreaRepository";
+import { InjectModel } from "@nestjs/mongoose";
+import { Area, AreaDocument } from "./schemas/area.schema";
+import { Model } from "mongoose";
+import { CreateAccionDto } from "src/accion/dto/create-accion.dto";
+import { UpdateAreaDto } from "./dto/update-area.dto";
+
+@Injectable()
+export class AreaRepository implements IAreaRepository{
+    private readonly logger = new Logger(AreaRepository.name);
+    private readonly ENTITY_NAME = 'Area';
+
+    constructor(
+        @InjectModel(Area.name)
+        private readonly areaModel: Model<AreaDocument>,
+    ) {}
+
+    async create(data: CreateAccionDto): Promise<Area> {
+        const createdArea = new this.areaModel(data);
+        return createdArea.save();
+    }
+
+    async findOne(id: string): Promise<Area | null> {
+        return this.areaModel.findById(id).exec();
+    }
+
+    async findAll(): Promise<Area[]> {
+        return this.areaModel.find().exec();
+    }
+
+    async update(id: string, data: Partial<UpdateAreaDto>): Promise<Area | null> {
+        return this.areaModel.findByIdAndUpdate(id, data, { new: true }).exec();
+    }
+
+    async remove(id: string): Promise<void> {
+        await this.areaModel.findByIdAndDelete(id).exec();
+    }
+}
+</file>
+
+<file path="src\area\area.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { AreaService } from './area.service';
+
+describe('AreaService', () => {
+  let service: AreaService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [AreaService],
+    }).compile();
+
+    service = module.get<AreaService>(AreaService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\area\area.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateAreaDto } from './dto/create-area.dto';
+import { UpdateAreaDto } from './dto/update-area.dto';
+import type{ IAreaRepository } from './IAreaRepository';
+
+@Injectable()
+export class AreaService {
+  private readonly logger = new Logger(AreaService.name);
+  
+  constructor(
+    @Inject('IAreaRepository') 
+    private readonly areaRepository: IAreaRepository,
+  ) {}
+  create(createAreaDto: CreateAreaDto) {
+    return 'This action adds a new area';
+  }
+
+  findAll() {
+    return `This action returns all area`;
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} area`;
+  }
+
+  update(id: number, updateAreaDto: UpdateAreaDto) {
+    return `This action updates a #${id} area`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} area`;
+  }
+}
+
+</file>
+
+<file path="src\area\IAreaRepository.ts">
+import { CreateAreaDto } from "./dto/create-area.dto";
+import { UpdateAreaDto } from "./dto/update-area.dto";
+import { Area } from "./schemas/area.schema";
+
+export interface IAreaRepository {
+    create(data: CreateAreaDto) : Promise<Area>;
+    findOne(id: string) : Promise<Area | null>;
+    findAll() : Promise<Area[]>;
+    update(id: string, data: Partial<UpdateAreaDto>) : Promise<Area | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\area\dto\create-area.dto.ts">
+export class CreateAreaDto {}
+
+</file>
+
+<file path="src\area\dto\update-area.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateAreaDto } from './create-area.dto';
+
+export class UpdateAreaDto extends PartialType(CreateAreaDto) {}
+
+</file>
+
+<file path="src\area\schemas\area.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type AreaDocument = HydratedDocument<Area>;
+
+@Schema({ collection: 'areas', timestamps: true })
+export class Area {
+  @Prop({ required: true })
+  nombre: string;
+}
+
+export const AreaSchema = SchemaFactory.createForClass(Area);
+
+</file>
+
+<file path="src\cliente\cliente.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ClienteController } from './cliente.controller';
+import { ClienteService } from './cliente.service';
+
+describe('ClienteController', () => {
+  let controller: ClienteController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ClienteController],
+      providers: [ClienteService],
+    }).compile();
+
+    controller = module.get<ClienteController>(ClienteController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\cliente\cliente.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ClienteService } from './cliente.service';
+import { CreateClienteDto } from './dto/create-cliente.dto';
+import { UpdateClienteDto } from './dto/update-cliente.dto';
+
+@Controller('cliente')
+export class ClienteController {
+  constructor(private readonly clienteService: ClienteService) {}
+
+  @Post()
+  create(@Body() createClienteDto: CreateClienteDto) {
+    return this.clienteService.create(createClienteDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.clienteService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.clienteService.findById(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {
+    return this.clienteService.update(id, updateClienteDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.clienteService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\cliente\cliente.module.ts">
+import { Module } from '@nestjs/common';
+import { ClienteService } from './cliente.service';
+import { ClienteController } from './cliente.controller';
+import { Mongoose } from 'mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ClienteSchema } from './schemas/cliente.schema';
+import { ClienteRepository } from './cliente.repository';
+
+@Module({
+
+  imports: [
+    MongooseModule.forFeature([{name: 'Cliente', schema: ClienteSchema }]),
+  ],
+
+  controllers: [ClienteController],
+  providers: [
+    ClienteService,
+    {
+      provide: 'IClienteRepository',
+      useClass: ClienteRepository,
+    },
+  ],
+  exports: [ClienteService],
+})
+
+export class ClienteModule {}
+
+</file>
+
+<file path="src\cliente\cliente.repository.ts">
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+import { Model } from "mongoose";
+import { Cliente, ClienteDocument } from "./schemas/cliente.schema";
+import { InjectModel } from "@nestjs/mongoose";
+import { CreateClienteDto } from "./dto/create-cliente.dto";
+import { UpdateClienteDto } from "./dto/update-cliente.dto";
+import { IClienteRepository } from "./IClienteRepository";
+
+@Injectable()
+export class ClienteRepository implements IClienteRepository {
+    private readonly logger = new Logger(ClienteRepository.name);
+    private readonly ENTITY_NAME = 'Cliente';
+
+    constructor(
+        @InjectModel(Cliente.name)
+        private readonly clienteModel: Model<ClienteDocument>,
+    ) {}
+
+    async create(data: CreateClienteDto): Promise<Cliente> {
+        try {
+            const createdCliente = new this.clienteModel(data);
+            return createdCliente.save();          
+        } catch(error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el Cliente')
+        }
+    }
+
+    async findById(id: string): Promise<Cliente | null> {
+        try {
+            return this.clienteModel.findById(id).exec();
+        } catch(error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Proyecto');
+        }
+    }
+
+    async findByName(nombre: string): Promise<Cliente | null> {
+        try {
+            return this.clienteModel.findOne({ nombre }).exec();
+        } catch(error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Proyecto');
+        }
+    }
+        
+    async findAll(): Promise<Cliente[]> {
+        try {
+            return this.clienteModel.find().exec();
+        } catch(error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los Clientes');
+        }
+    }
+
+    async update(id: string, data: Partial<UpdateClienteDto>): Promise<Cliente | null> {
+        try {
+            return this.clienteModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch(error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar el Cliente');
+        }
+    }   
+
+    async remove(id: string): Promise<void> {
+        try {
+            await this.clienteModel.findByIdAndDelete(id).exec();
+        } catch(error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el Proyecto');
+        }
+    }   
+
+}
+
+
+</file>
+
+<file path="src\cliente\cliente.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ClienteService } from './cliente.service';
+
+describe('ClienteService', () => {
+  let service: ClienteService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ClienteService],
+    }).compile();
+
+    service = module.get<ClienteService>(ClienteService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\cliente\cliente.service.ts">
+import { Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { CreateClienteDto } from './dto/create-cliente.dto';
+import { UpdateClienteDto } from './dto/update-cliente.dto';
+import type { IClienteRepository } from './IClienteRepository';
+
+@Injectable()
+export class ClienteService {
+  private readonly logger = new Logger(ClienteService.name);
+  private readonly ENTITY_NAME = 'Cliente';
+
+  constructor(
+    @Inject('IClienteRepository')
+    private readonly clienteRepository: IClienteRepository,
+  ) {}
+
+  async create(createClienteDto: CreateClienteDto) {
+   this.logger.log(`Creando nuevo ${this.ENTITY_NAME}`);
+   const cliente = await this.clienteRepository.findByName(createClienteDto.nombre);
+   if (cliente) {
+    this.logger.error(`Cliente con nombre: ${cliente.nombre} ya existe`)
+    throw new InternalServerErrorException(`Cliente con nombre ${cliente.nombre} ya existe`)
+   }
+
+   return this.clienteRepository.create(createClienteDto)    
+  }
+
+  async findAll() {
+    this.logger.log(`Buscando todos los ${this.ENTITY_NAME}s`);
+    return this.clienteRepository.findAll();
+  }
+
+  async findById(id: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`)
+    return this.clienteRepository.findById(id)
+  }
+
+  async update(id: string, updateClienteDto: UpdateClienteDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
+    const cliente = await this.clienteRepository.findById(id)
+
+    if(!cliente) {
+      this.logger.error(`Cliente con id ${id} no existe`);
+      throw new InternalServerErrorException(`Cliente con id ${id} no existe`);
+    }
+
+    return this.clienteRepository.update(id, updateClienteDto)
+  }
+
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`);
+    const cliente = await this.clienteRepository.findById(id)
+
+    if (!cliente) {
+      this.logger.error(`Proyecto con id ${id} no existe`);
+      throw new InternalServerErrorException(`Proyecto con id ${id} no existe`);
+    }
+
+    return this.clienteRepository.remove(id)
+    
+  }
+
+}
+
+</file>
+
+<file path="src\cliente\IClienteRepository.ts">
+import { CreateClienteDto } from "./dto/create-cliente.dto";
+import { UpdateClienteDto } from "./dto/update-cliente.dto";
+import { Cliente } from "./schemas/cliente.schema";
+
+export interface IClienteRepository {
+    create(data: CreateClienteDto) : Promise<Cliente>;
+    findById(id: string) : Promise<Cliente | null>;
+    findByName(nombre: string) : Promise <Cliente | null>
+    findAll() : Promise<Cliente[]>;
+    update(id: string, data: UpdateClienteDto) : Promise<Cliente | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\cliente\dto\create-cliente.dto.ts">
+import { IsString, IsNotEmpty, MaxLength, Matches } from 'class-validator';
+import { Transform } from 'class-transformer';
+
+export class CreateClienteDto {
+
+  @Transform(({ value }) => value?.trim().toLowerCase())
+  @IsString({ message: 'La prioridad debe ser una cadena de texto.' })
+  @IsNotEmpty({ message: 'La prioridad no puede estar vacía.' })
+  @MaxLength(255, { message: 'La prioridad no puede superar los 255 caracteres.' })
+  @Matches(/^[A-Za-z0-9 áéíóúÁÉÍÓÚñÑ]+$/, {
+    message: 'La prioridad solo puede contener letras, números y espacios.',
+  })
+  nombre: string;   
+}
+
+</file>
+
+<file path="src\cliente\dto\update-cliente.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateClienteDto } from './create-cliente.dto';
+
+export class UpdateClienteDto extends PartialType(CreateClienteDto) {}
+
+</file>
+
+<file path="src\cliente\schemas\cliente.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+import { Types } from 'mongoose';
+
+export type ClienteDocument = HydratedDocument<Cliente>;
+
+@Schema({ collection: 'clientes', timestamps: true })
+export class Cliente {
+  @Prop({ required: true })
+  nombre: string;
+
+  // Relación: Cliente 1..* Proyecto
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Proyecto' }] })
+  proyectos: Types.ObjectId[];
+}
+
+export const ClienteSchema = SchemaFactory.createForClass(Cliente);
+
+</file>
+
+<file path="src\estado\estado.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { EstadoController } from './estado.controller';
+import { EstadoService } from './estado.service';
+
+describe('EstadoController', () => {
+  let controller: EstadoController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [EstadoController],
+      providers: [EstadoService],
+    }).compile();
+
+    controller = module.get<EstadoController>(EstadoController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\estado\estado.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { EstadoService } from './estado.service';
+import { CreateEstadoDto } from './dto/create-estado.dto';
+import { UpdateEstadoDto } from './dto/update-estado.dto';
+
+@Controller('estado')
+export class EstadoController {
+  constructor(private readonly estadoService: EstadoService) {}
+
+  @Post()
+  create(@Body() createEstadoDto: CreateEstadoDto) {
+    return this.estadoService.create(createEstadoDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.estadoService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.estadoService.findById(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateEstadoDto: UpdateEstadoDto) {
+    return this.estadoService.update(id, updateEstadoDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.estadoService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\estado\estado.module.ts">
+import { Module } from '@nestjs/common';
+import { EstadoService } from './estado.service';
+import { EstadoController } from './estado.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Estado, EstadoSchema } from './schemas/estado.schema';
+import { EstadoRepository } from './estado.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Estado.name, schema: EstadoSchema }]),
+  ],
+  controllers: [EstadoController],
+  providers: [
+    EstadoService,
+    {
+      provide: 'IEstadoRepository',
+      useClass: EstadoRepository,
+    }
+  ],
+  exports: [EstadoService],
+})
+export class EstadoModule {}
+
+</file>
+
+<file path="src\estado\estado.repository.ts">
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Estado, EstadoDocument } from "./schemas/estado.schema";
+import { Model } from "mongoose";
+import { IEstadoRepository } from "./IEstadoRepository";
+
+@Injectable()
+export class EstadoRepository implements IEstadoRepository {
+    private readonly logger = new Logger(EstadoRepository.name);
+    private readonly ENTITY_NAME = 'Estado';
+
+    constructor(
+        @InjectModel(Estado.name)
+        private readonly estadoModel: Model<EstadoDocument>,
+    ) {}
+
+    async create(data: Partial<Estado>): Promise<Estado> {
+        try {
+            const createdEstado = new this.estadoModel(data);
+            return createdEstado.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el Estado');
+        }
+    }
+    
+    async findByName(nombre: string): Promise<Estado | null> {
+        try {
+            return this.estadoModel.findOne({ nombre }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Estado');
+        }
+    }
+
+    async findById(id: string): Promise<Estado | null> {
+        try {
+            return this.estadoModel.findById(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Estado');
+        }
+    }
+
+    async findAll(): Promise<Estado[]> {
+        try {
+            return this.estadoModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los Estados');
+        }
+    }
+
+    async update(id: string, data: Partial<Estado>): Promise<Estado | null> {
+        try {
+            return this.estadoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar el Estado');
+        }
+    }
+
+    async remove(id: string): Promise<void> {
+        try {
+            await this.estadoModel.findByIdAndDelete(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el Estado');
+        }
+    }
+
+}
+</file>
+
+<file path="src\estado\estado.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { EstadoService } from './estado.service';
+
+describe('EstadoService', () => {
+  let service: EstadoService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [EstadoService],
+    }).compile();
+
+    service = module.get<EstadoService>(EstadoService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\estado\estado.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateEstadoDto } from './dto/create-estado.dto';
+import { UpdateEstadoDto } from './dto/update-estado.dto';
+import type { IEstadoRepository } from './IEstadoRepository';
+
+@Injectable()
+export class EstadoService {
+  private readonly logger = new Logger(EstadoService.name);
+  private readonly ENTITY_NAME = 'Estado';
+
+  constructor(
+    @Inject('IEstadoRepository')
+    private readonly estadoRepository: IEstadoRepository,
+  ) {}
+
+  async create(createEstadoDto: CreateEstadoDto) {
+    this.logger.log(`Creando un nuevo estado con nombre: ${createEstadoDto.nombre}`, );
+    await this.validarExisteNombre (createEstadoDto.nombre);
+    const entity = await this.estadoRepository.create(createEstadoDto);
+    return entity;
+  }
+
+  async findAll() {
+    this.logger.log(`Buscando ${this.ENTITY_NAME}s`, );
+    const entities = await this.estadoRepository.findAll();
+    return entities;
+  }
+
+  async findById(id: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`, );
+    const entity =  await this.estadoRepository.findById(id);
+    return entity;
+  }
+
+  async findByName(nombre: string) {
+    return this.estadoRepository.findByName(nombre);
+  }
+
+  async update(id: string, updateEstadoDto: UpdateEstadoDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    await this.estadoRepository.findById(id);
+    const entity = await this.estadoRepository.update(id, updateEstadoDto);
+    return entity;
+  }
+
+  async remove(id: string) {
+    this .logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    return this.estadoRepository.remove(id);
+  }
+
+  private async validarExisteNombre(nombre: string): Promise<void> {
+    const existingTipoReclamo = await this.estadoRepository.findByName(nombre);
+    if (existingTipoReclamo) {
+      this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new Error(`El nombre ${nombre} ya existe.`);
+    }
+  }
+}
+
+</file>
+
+<file path="src\estado\IEstadoRepository.ts">
+import { CreateEstadoDto } from "./dto/create-estado.dto";
+import { UpdateEstadoDto } from "./dto/update-estado.dto";
+import { Estado } from "./schemas/estado.schema";
+
+export interface IEstadoRepository {
+    create(data: CreateEstadoDto) : Promise<Estado>;
+    findById(id: string) : Promise<Estado | null>;
+    findByName (nombre: string) : Promise<Estado | null>;
+    findAll() : Promise<Estado[]>;
+    update(id: string, data: UpdateEstadoDto) : Promise<Estado | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\estado\dto\create-estado.dto.ts">
+import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsString } from 'class-validator';
+
+export class CreateEstadoDto {
+    @Transform(({ value }) => value.trim().toLowerCase())
+    @IsString()
+    @IsNotEmpty({message: 'El nombre no debe estar vacío'})
+    nombre: string;
+}
+
+</file>
+
+<file path="src\estado\dto\update-estado.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateEstadoDto } from './create-estado.dto';
+
+export class UpdateEstadoDto extends PartialType(CreateEstadoDto) {}
+
+</file>
+
+<file path="src\estado\schemas\estado.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type EstadoDocument = HydratedDocument<Estado>;
+
+@Schema({ collection: 'estados', timestamps: true })
+export class Estado {
+  @Prop({ required: true })
+  nombre: string;
+}
+
+export const EstadoSchema = SchemaFactory.createForClass(Estado);
+
+</file>
+
+<file path="src\nivel_criticidad\INivel_criticidadRepository.ts">
+import { CreateNivelCriticidadDto } from "./dto/create-nivel_criticidad.dto";
+import { UpdateNivelCriticidadDto } from "./dto/update-nivel_criticidad.dto";
+import { NivelCriticidad } from "./schemas/nivel_criticidad.schema";
+
+export interface INivelCriticidadRepository {
+    create(data: CreateNivelCriticidadDto) : Promise<NivelCriticidad>;
+    findOne(id: string) : Promise<NivelCriticidad | null>;
+    findByName(nombre: string) : Promise<NivelCriticidad | null>;
+    findAll() : Promise<NivelCriticidad[]>;
+    update(id:string, data: UpdateNivelCriticidadDto) : Promise<NivelCriticidad | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\nivel_criticidad\nivel_criticidad.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { NivelCriticidadController } from './nivel_criticidad.controller';
+import { NivelCriticidadService } from './nivel_criticidad.service';
+
+describe('NivelCriticidadController', () => {
+  let controller: NivelCriticidadController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [NivelCriticidadController],
+      providers: [NivelCriticidadService],
+    }).compile();
+
+    controller = module.get<NivelCriticidadController>(NivelCriticidadController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\nivel_criticidad\nivel_criticidad.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { NivelCriticidadService } from './nivel_criticidad.service';
+import { CreateNivelCriticidadDto } from './dto/create-nivel_criticidad.dto';
+import { UpdateNivelCriticidadDto } from './dto/update-nivel_criticidad.dto';
+
+@Controller('nivel-criticidad')
+export class NivelCriticidadController {
+  constructor(private readonly nivelCriticidadService: NivelCriticidadService) {}
+
+  @Post()
+  create(@Body() createNivelCriticidadDto: CreateNivelCriticidadDto) {
+    return this.nivelCriticidadService.create(createNivelCriticidadDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.nivelCriticidadService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.nivelCriticidadService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateNivelCriticidadDto: UpdateNivelCriticidadDto) {
+    return this.nivelCriticidadService.update(id, updateNivelCriticidadDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.nivelCriticidadService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\nivel_criticidad\nivel_criticidad.module.ts">
+import { Module } from '@nestjs/common';
+import { NivelCriticidadService } from './nivel_criticidad.service';
+import { NivelCriticidadController } from './nivel_criticidad.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { NivelCriticidadRepository } from './nivel_criticidad.repository';
+import { NivelCriticidad, NivelCriticidadSchema } from './schemas/nivel_criticidad.schema';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: NivelCriticidad.name, schema: NivelCriticidadSchema }]),
+  ],
+  controllers: [NivelCriticidadController],
+  providers: [
+    NivelCriticidadService,
+  {
+      provide: 'INivelCriticidadRepository',
+      useClass: NivelCriticidadRepository,
+  }
+  ],
+  exports: [NivelCriticidadService],
+})
+export class NivelCriticidadModule {}
+
+</file>
+
+<file path="src\nivel_criticidad\nivel_criticidad.repository.ts">
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { NivelCriticidad, NivelCriticidadDocument } from "./schemas/nivel_criticidad.schema";
+import { Model } from "mongoose";
+
+@Injectable()
+export class NivelCriticidadRepository {
+    private readonly logger = new Logger(NivelCriticidadRepository.name);
+    private readonly ENTITY_NAME = 'NivelCriticidad';
+
+    constructor(
+        @InjectModel(NivelCriticidad.name)
+        private readonly nivelCriticidadModel: Model<NivelCriticidadDocument>,
+    ) {}
+
+    async create(data: any): Promise<NivelCriticidad> {
+        try {
+            const createdNivelCriticidad = new this.nivelCriticidadModel(data);
+            return createdNivelCriticidad.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el NivelCriticidad');
+        }
+    }
+
+    async findOne(id: string): Promise<NivelCriticidad | null> {
+        try {
+            return this.nivelCriticidadModel.findById(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el NivelCriticidad');
+        }
+        
+    }
+
+    async findByName(nombre: string): Promise<NivelCriticidad | null> {
+        try {
+            return this.nivelCriticidadModel.findOne({ nombre }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el NivelCriticidad');
+        }
+    }
+
+    async findAll(): Promise<NivelCriticidad[]> {
+        try {
+            return this.nivelCriticidadModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los NivelCriticidad');
+        }
+    }
+
+    async update(id: string, data: any): Promise<NivelCriticidad | null> {
+        try {
+            return this.nivelCriticidadModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar el NivelCriticidad');
+        }
+    }
+
+    async remove(id: string): Promise<void> {
+        try {
+            await this.nivelCriticidadModel.findByIdAndDelete(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el NivelCriticidad');
+        }
+    }
+}
+</file>
+
+<file path="src\nivel_criticidad\nivel_criticidad.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { NivelCriticidadService } from './nivel_criticidad.service';
+
+describe('NivelCriticidadService', () => {
+  let service: NivelCriticidadService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [NivelCriticidadService],
+    }).compile();
+
+    service = module.get<NivelCriticidadService>(NivelCriticidadService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\nivel_criticidad\nivel_criticidad.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateNivelCriticidadDto } from './dto/create-nivel_criticidad.dto';
+import { UpdateNivelCriticidadDto } from './dto/update-nivel_criticidad.dto';
+import type { INivelCriticidadRepository } from './INivel_criticidadRepository';
+
+@Injectable()
+export class NivelCriticidadService {
+  private readonly logger = new Logger(NivelCriticidadService.name);
+  private readonly ENTITY_NAME = 'NivelCriticidad';
+
+  constructor(
+    @Inject('INivelCriticidadRepository') 
+    private readonly nivelCriticidadRepository: INivelCriticidadRepository,
+  ) {}
+  
+  async create(createNivelCriticidadDto: CreateNivelCriticidadDto) {
+    this.logger.log(`Creando un nuevo ${createNivelCriticidadDto.nombre} con nombre: ${createNivelCriticidadDto.nombre}`, );
+    await this.validarExisteNombre (createNivelCriticidadDto.nombre);
+    const entity = await this.nivelCriticidadRepository.create(createNivelCriticidadDto);
+    return entity
+  }
+
+  async findAll() {
+    this.logger.log(`Buscando ${this.ENTITY_NAME}s`, );
+    return this.nivelCriticidadRepository.findAll();
+  }
+
+  async findOne(id: string) {
+    return `This action returns a #${id} nivelCriticidad`;
+  }
+
+  async update(id: string, updateNivelCriticidadDto: UpdateNivelCriticidadDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    await this.nivelCriticidadRepository.findOne(id);
+    const entity = await this.nivelCriticidadRepository.update(id, updateNivelCriticidadDto);
+    return entity;
+  }
+
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    return this.nivelCriticidadRepository.remove(id);
+  }
+
+  private async validarExisteNombre(nombre: string): Promise<void> {
+    const existingTipoReclamo = await this.nivelCriticidadRepository.findByName(nombre);
+    if (existingTipoReclamo) {
+      this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new Error(`El nombre ${nombre} ya existe.`);
+    }
+  }
+}
+
+</file>
+
+<file path="src\nivel_criticidad\dto\create-nivel_criticidad.dto.ts">
+import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsString } from 'class-validator';
+
+export class CreateNivelCriticidadDto {
+    @Transform(({ value }) => value.trim().toLowerCase())
+    @IsString()
+    @IsNotEmpty({message: 'El nombre no debe estar vacío'})
+    nombre: string;
+}
+
+</file>
+
+<file path="src\nivel_criticidad\dto\update-nivel_criticidad.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateNivelCriticidadDto } from './create-nivel_criticidad.dto';
+
+export class UpdateNivelCriticidadDto extends PartialType(CreateNivelCriticidadDto) {}
+
+</file>
+
+<file path="src\nivel_criticidad\schemas\nivel_criticidad.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type NivelCriticidadDocument = HydratedDocument<NivelCriticidad>;
+
+@Schema({ collection: 'niveles_criticidad', timestamps: true })
+export class NivelCriticidad {
+  @Prop({ required: true })
+  nombre: string;
+}
+
+export const NivelCriticidadSchema = SchemaFactory.createForClass(NivelCriticidad);
+
+</file>
+
+<file path="src\prioridad\IPrioridadRepository.ts">
+import { CreatePrioridadDto } from "./dto/create-prioridad.dto";
+import { UpdatePrioridadDto } from "./dto/update-prioridad.dto";
+import { Prioridad } from "./schemas/prioridad.schema";
+
+export interface IPrioridadRepository {
+    create(data: CreatePrioridadDto) : Promise<Prioridad>;
+    findOne(id: string) : Promise<Prioridad | null>;
+    findAll() : Promise<Prioridad[]>;
+    update(id: string, data: UpdatePrioridadDto) : Promise<Prioridad | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\prioridad\prioridad.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { PrioridadController } from './prioridad.controller';
+import { PrioridadService } from './prioridad.service';
+
+describe('PrioridadController', () => {
+  let controller: PrioridadController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [PrioridadController],
+      providers: [PrioridadService],
+    }).compile();
+
+    controller = module.get<PrioridadController>(PrioridadController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\prioridad\prioridad.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { PrioridadService } from './prioridad.service';
+import { CreatePrioridadDto } from './dto/create-prioridad.dto';
+import { UpdatePrioridadDto } from './dto/update-prioridad.dto';
+
+@Controller('prioridad')
+export class PrioridadController {
+  constructor(private readonly prioridadService: PrioridadService) {}
+
+  @Post()
+  create(@Body() createPrioridadDto: CreatePrioridadDto) {
+    return this.prioridadService.create(createPrioridadDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.prioridadService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.prioridadService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updatePrioridadDto: UpdatePrioridadDto) {
+    return this.prioridadService.update(id, updatePrioridadDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.prioridadService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\prioridad\prioridad.module.ts">
+import { Module } from '@nestjs/common';
+import { PrioridadService } from './prioridad.service';
+import { PrioridadController } from './prioridad.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Prioridad, PrioridadSchema } from './schemas/prioridad.schema';
+import { PrioridadRepository } from './prioridad.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Prioridad.name, schema: PrioridadSchema }]),
+  ],
+  controllers: [PrioridadController],
+  providers: [
+    PrioridadService,
+    {
+      provide: 'IPrioridadRepository',
+      useClass: PrioridadRepository,  
+    }
+  ],
+  exports: [PrioridadService],
+})
+export class PrioridadModule {}
+
+</file>
+
+<file path="src\prioridad\prioridad.repository.ts">
+import { Injectable, Logger, NotFoundException, InternalServerErrorException } from "@nestjs/common";
+import { Prioridad, PrioridadDocument } from "./schemas/prioridad.schema";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { IPrioridadRepository } from "./IPrioridadRepository";
+import { CreatePrioridadDto } from "./dto/create-prioridad.dto";
+import { UpdatePrioridadDto } from "./dto/update-prioridad.dto";
+
+@Injectable()
+export class PrioridadRepository implements IPrioridadRepository {
+  private readonly logger = new Logger(PrioridadRepository.name);
+
+  constructor(
+    @InjectModel(Prioridad.name)
+    private readonly prioridadModel: Model<PrioridadDocument>,
+  ) {}
+
+  async create(data: CreatePrioridadDto): Promise<Prioridad> {
+    try {
+      const createdPrioridad = new this.prioridadModel(data);
+      return await createdPrioridad.save();
+    } catch (error) {
+      this.logger.error(`Error creando prioridad: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Error al crear la prioridad');
+    }
+  }
+
+  async findOne(id: string): Promise<Prioridad | null> {
+    try {
+      const prioridad = await this.prioridadModel.findById(id).exec();
+      
+      if (!prioridad) {
+        throw new NotFoundException(`Prioridad con ID ${id} no encontrada`);
+      }
+      
+      return prioridad;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      this.logger.error(`Error finding prioridad with id ${id}: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Error al buscar la prioridad');
+    }
+  }
+
+  async findAll(): Promise<Prioridad[]> {
+    try {
+      return await this.prioridadModel.find().exec();
+    } catch (error) {
+      this.logger.error(`Error finding all prioridades: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Error al obtener las prioridades');
+    }
+  }
+
+  async update(id: string, data: UpdatePrioridadDto): Promise<Prioridad | null> {
+    try {
+      const updatedPrioridad = await this.prioridadModel
+        .findByIdAndUpdate(id, data, { new: true })
+        .exec();
+      
+      if (!updatedPrioridad) {
+        throw new NotFoundException(`Prioridad con ID ${id} no encontrada`);
+      }
+      
+      return updatedPrioridad;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      this.logger.error(`Error updating prioridad with id ${id}: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Error al actualizar la prioridad');
+    }
+  }
+
+  async remove(id: string): Promise<void> {
+    try {
+      const result = await this.prioridadModel.findByIdAndDelete(id).exec();
+      
+      if (!result) {
+        throw new NotFoundException(`Prioridad con ID ${id} no encontrada`);
+      }
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      this.logger.error(`Error removing prioridad with id ${id}: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Error al eliminar la prioridad');
+    }
+  }
+}
+</file>
+
+<file path="src\prioridad\prioridad.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { PrioridadService } from './prioridad.service';
+
+describe('PrioridadService', () => {
+  let service: PrioridadService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [PrioridadService],
+    }).compile();
+
+    service = module.get<PrioridadService>(PrioridadService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\prioridad\prioridad.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreatePrioridadDto } from './dto/create-prioridad.dto';
+import { UpdatePrioridadDto } from './dto/update-prioridad.dto';
+import type { IPrioridadRepository } from './IPrioridadRepository';
+
+@Injectable()
+export class PrioridadService {
+  private readonly logger = new Logger(PrioridadService.name);
+  private readonly ENTITY_NAME = 'Prioridad';
+
+  constructor(
+    @Inject('IPrioridadRepository')
+    private readonly prioridadRepository: IPrioridadRepository,
+  ) {}
+
+  async create(createPrioridadDto: CreatePrioridadDto) {
+    return this.prioridadRepository.create(createPrioridadDto);
+  }
+
+  async findAll() {
+    return this.prioridadRepository.findAll();
+  }
+
+  async findOne(id: string) {
+    return this.prioridadRepository.findOne(id);
+  }
+
+  async update(nombre: string, updatePrioridadDto: UpdatePrioridadDto) {
+    return this.prioridadRepository.update(nombre, updatePrioridadDto);
+  }
+
+  async remove(id: string) {
+    return this.prioridadRepository.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\prioridad\dto\create-prioridad.dto.ts">
+import { IsString, IsNotEmpty, MaxLength, Matches } from 'class-validator';
+import { Transform } from 'class-transformer';
+
+export class CreatePrioridadDto {
+
+  @Transform(({ value }) => value?.trim().toLowerCase())
+  @IsString({ message: 'La prioridad debe ser una cadena de texto.' })
+  @IsNotEmpty({ message: 'La prioridad no puede estar vacía.' })
+  @MaxLength(255, { message: 'La prioridad no puede superar los 255 caracteres.' })
+  @Matches(/^[A-Za-z0-9 áéíóúÁÉÍÓÚñÑ]+$/, {
+    message: 'La prioridad solo puede contener letras, números y espacios.',
+  })
+  nombre: string;   
+}
+
+</file>
+
+<file path="src\prioridad\dto\update-prioridad.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreatePrioridadDto } from './create-prioridad.dto';
+
+export class UpdatePrioridadDto extends PartialType(CreatePrioridadDto) {}
+
+</file>
+
+<file path="src\prioridad\schemas\prioridad.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type PrioridadDocument = HydratedDocument<Prioridad>;
+
+@Schema({ collection: 'prioridades', timestamps: true })
+export class Prioridad {
+  @Prop({ required: true })
+  nombre: string;
+}
+
+export const PrioridadSchema = SchemaFactory.createForClass(Prioridad);
+
+</file>
+
+<file path="src\proyecto\IProyectoRepository.ts">
+import { CreateProyectoDto } from "./dto/create-proyecto.dto";
+import { UpdateProyectoDto } from "./dto/update-proyecto.dto";
+import { Proyecto } from "./schema/proyecto.schema";
+
+export interface IProyectoRepository {
+    create(data: CreateProyectoDto) : Promise<Proyecto>;
+    findOne(id: string) : Promise<Proyecto | null>;
+    findByName(nombre: string) : Promise<Proyecto | null>;
+    findAll() : Promise<Proyecto[]>;
+    update(id: string, data: UpdateProyectoDto) : Promise<Proyecto | null>;
+    remove(id: string) : Promise<void>;
+}
+
+</file>
+
+<file path="src\proyecto\proyecto.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ProyectoController } from './proyecto.controller';
+import { ProyectoService } from './proyecto.service';
+
+describe('ProyectoController', () => {
+  let controller: ProyectoController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ProyectoController],
+      providers: [ProyectoService],
+    }).compile();
+
+    controller = module.get<ProyectoController>(ProyectoController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\proyecto\proyecto.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ProyectoService } from './proyecto.service';
+import { CreateProyectoDto } from './dto/create-proyecto.dto';
+import { UpdateProyectoDto } from './dto/update-proyecto.dto';
+
+@Controller('proyecto')
+export class ProyectoController {
+  constructor(private readonly proyectoService: ProyectoService) {}
+
+  @Post()
+  create(@Body() createProyectoDto: CreateProyectoDto) {
+    return this.proyectoService.create(createProyectoDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.proyectoService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.proyectoService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateProyectoDto: UpdateProyectoDto) {
+    return this.proyectoService.update(id, updateProyectoDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.proyectoService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\proyecto\proyecto.module.ts">
+import { Module } from '@nestjs/common';
+import { ProyectoService } from './proyecto.service';
+import { ProyectoController } from './proyecto.controller';
+import { Mongoose } from 'mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Proyecto, ProyectoSchema } from './schema/proyecto.schema';
+import { ProyectoRepository } from './proyecto.repository';
+import { TipoProyectoModule } from 'src/tipo_proyecto/tipo_proyecto.module';
+import { ClienteModule } from 'src/cliente/cliente.module';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Proyecto.name, schema: ProyectoSchema }]),
+    TipoProyectoModule,
+    ClienteModule,
+  ],
+
+  controllers: [ProyectoController],
+  providers: [ProyectoService,
+    {
+      provide: 'IProyectoRepository',
+      useClass: ProyectoRepository,
+    }
+  ],
+  exports: [ProyectoService],
+})
+export class ProyectoModule {}
+
+</file>
+
+<file path="src\proyecto\proyecto.repository.ts">
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Proyecto, ProyectoDocument } from "./schema/proyecto.schema";
+import { Model } from "mongoose";
+import { CreateProyectoDto } from "./dto/create-proyecto.dto";
+import { UpdateProyectoDto } from "./dto/update-proyecto.dto";
+import { IProyectoRepository } from "./IProyectoRepository";
+
+@Injectable()
+export class ProyectoRepository implements IProyectoRepository {
+    private readonly logger = new Logger(ProyectoRepository.name);
+    private readonly ENTITY_NAME = 'Proyecto';
+
+    constructor(
+        @InjectModel(Proyecto.name)
+        private readonly proyectoModel: Model<ProyectoDocument>,
+    ) {}
+
+    async create(data: CreateProyectoDto): Promise<Proyecto> {
+        try {
+            const createdProyecto = new this.proyectoModel(data);
+            return createdProyecto.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el Proyecto');
+        }
+    }
+
+    async findOne(id: string): Promise<Proyecto | null> {
+        try {
+            return this.proyectoModel.findById(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Proyecto');
+        }
+    }
+
+    async findByName(nombre: string): Promise<Proyecto | null> {
+        try {
+            return this.proyectoModel.findOne({ nombre }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Proyecto');
+        }
+    }
+
+    async findAll(): Promise<Proyecto[]> {
+        try {
+            return this.proyectoModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los Proyectos');
+        }
+    }
+
+    async update(id: string, data: UpdateProyectoDto): Promise<Proyecto | null> {
+        try {
+            return this.proyectoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar el Proyecto');
+        }
+    }
+
+    async remove(id: string): Promise<void> {
+        try {
+            await this.proyectoModel.findByIdAndDelete(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el Proyecto');
+        }
+    }
+
+}
+</file>
+
+<file path="src\proyecto\proyecto.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ProyectoService } from './proyecto.service';
+
+describe('ProyectoService', () => {
+  let service: ProyectoService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ProyectoService],
+    }).compile();
+
+    service = module.get<ProyectoService>(ProyectoService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\proyecto\proyecto.service.ts">
+import { Inject, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { CreateProyectoDto } from './dto/create-proyecto.dto';
+import { UpdateProyectoDto } from './dto/update-proyecto.dto';
+import type { IProyectoRepository } from './IProyectoRepository';
+import { TipoProyectoService } from 'src/tipo_proyecto/tipo_proyecto.service';
+import { ClienteService } from 'src/cliente/cliente.service';
+
+@Injectable()
+export class ProyectoService {
+  private readonly logger = new Logger(ProyectoService.name);
+  private readonly ENTITY_NAME = 'Proyecto';
+
+  constructor(
+    private tipoProyectoService: TipoProyectoService,
+    private clienteService: ClienteService,
+    @Inject('IProyectoRepository')
+    private readonly proyectoRepository: IProyectoRepository,
+  ) {}
+
+  async create(createProyectoDto: CreateProyectoDto) {
+    this.logger.log(`Creando nuevo ${this.ENTITY_NAME}`);
+    const { nombre, clienteId, tipoProyectoId} = createProyectoDto;
+    const tipoProyecto = await this.tipoProyectoService.findById(tipoProyectoId);
+    if (!tipoProyecto) {
+      this.logger.error(`TipoProyecto con id ${tipoProyectoId} no existe`);
+      throw new NotFoundException(`No existe un TipoProyecto con id: ${tipoProyectoId}`);
+    }
+    const proyecto = await this.proyectoRepository.findByName(nombre);
+    if (proyecto) {
+      this.logger.error(`Proyecto con nombre ${nombre} ya existe`);
+      throw new InternalServerErrorException(`Proyecto con nombre ${nombre} ya existe`);
+    }
+
+    const cliente = await this.clienteService.findById(clienteId);
+    if (!cliente) {
+      this.logger.error(`Cliente con id ${clienteId} no existe`);
+      throw new NotFoundException(`No existe un Cliente con id: ${clienteId}`);
+    }
+
+    return this.proyectoRepository.create(createProyectoDto);
+  }
+
+  async findAll() {
+    this.logger.log(`Buscando todos los ${this.ENTITY_NAME}s`);
+    return this.proyectoRepository.findAll();
+  }
+
+  async findOne(id: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`);
+    return this.proyectoRepository.findOne(id);
+  }
+
+  async update(id: string, updateProyectoDto: UpdateProyectoDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
+    const reclamo = await this.proyectoRepository.findOne(id);
+    if (!reclamo) {
+      this.logger.error(`Proyecto con id ${id} no existe`);
+      throw new InternalServerErrorException(`Proyecto con id ${id} no existe`);
+    }
+    return this.proyectoRepository.update(id, updateProyectoDto);
+  }
+
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`);
+    const reclamo = await this.proyectoRepository.findOne(id);
+    if (!reclamo) {
+      this.logger.error(`Proyecto con id ${id} no existe`);
+      throw new InternalServerErrorException(`Proyecto con id ${id} no existe`);
+    }
+    return this.proyectoRepository.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\proyecto\dto\create-proyecto.dto.ts">
+import { IsString, IsNotEmpty, MaxLength, Matches, IsMongoId } from 'class-validator';
+import { Transform } from 'class-transformer';
+
+export class CreateProyectoDto {
+
+  @Transform(({ value }) => value?.trim().toLowerCase())
+  @IsString({ message: 'La prioridad debe ser una cadena de texto.' })
+  @IsNotEmpty({ message: 'La prioridad no puede estar vacía.' })
+  @MaxLength(255, { message: 'La prioridad no puede superar los 255 caracteres.' })
+  @Matches(/^[A-Za-z0-9 áéíóúÁÉÍÓÚñÑ]+$/, {
+    message: 'La prioridad solo puede contener letras, números y espacios.',
+  })
+  nombre: string;   
+
+  @IsString({ message: 'El tipo de proyecto debe ser una cadena de texto.' })
+  @IsNotEmpty({ message: 'El tipo de reclamo no puede estar vacío.' })
+  @IsMongoId()
+  tipoProyectoId: string;
+
+  @IsString({ message: 'El tipo de reclamo debe ser una cadena de texto.' })
+  @IsNotEmpty({ message: 'El tipo de reclamo no puede estar vacío.' })
+  @IsMongoId()
+  clienteId : string;
+}
+
+</file>
+
+<file path="src\proyecto\dto\update-proyecto.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateProyectoDto } from './create-proyecto.dto';
+
+export class UpdateProyectoDto extends PartialType(CreateProyectoDto) {}
+
+</file>
+
+<file path="src\proyecto\schema\proyecto.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument, Types } from 'mongoose';
+
+export type ProyectoDocument = HydratedDocument<Proyecto>;
+
+@Schema({ timestamps: true })
+export class Proyecto {
+
+  @Prop({ required: true })
+  nombre: string;
+
+  // Relaciones
+
+  // Cliente 1 -> * Proyecto
+  @Prop({ type: Types.ObjectId, ref: 'Cliente', required: true })
+  clienteId: Types.ObjectId;
+
+  // TipoProyecto 1 -> * Proyecto
+  @Prop({ type: Types.ObjectId, ref: 'TipoProyecto', required: true })
+  tipoProyectoId: Types.ObjectId;
+}
+
+export const ProyectoSchema = SchemaFactory.createForClass(Proyecto);
+
+</file>
+
+<file path="src\reclamo\IReclamoRepository.ts">
+import { CreateReclamoDto } from "./dto/create-reclamo.dto";
+import { UpdateReclamoDto } from "./dto/update-reclamo.dto";
+import { Reclamo } from "./schemas/reclamo.schema";
+
+export interface IReclamoRepository {
+    create(data: CreateReclamoDto) : Promise<Reclamo>;
+    findOne(id: string) : Promise<Reclamo | null>;
+    findAll() : Promise<Reclamo[]>;
+    update(id: string, data: UpdateReclamoDto) : Promise<Reclamo | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\reclamo\reclamo.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ReclamoController } from './reclamo.controller';
+import { ReclamoService } from './reclamo.service';
+
+describe('ReclamoController', () => {
+  let controller: ReclamoController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ReclamoController],
+      providers: [ReclamoService],
+    }).compile();
+
+    controller = module.get<ReclamoController>(ReclamoController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\reclamo\reclamo.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ReclamoService } from './reclamo.service';
+import { CreateReclamoDto } from './dto/create-reclamo.dto';
+import { UpdateReclamoDto } from './dto/update-reclamo.dto';
+
+@Controller('reclamo')
+export class ReclamoController {
+  constructor(private readonly reclamoService: ReclamoService) {}
+
+  @Post()
+  create(@Body() createReclamoDto: CreateReclamoDto) {
+    return this.reclamoService.create(createReclamoDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.reclamoService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.reclamoService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateReclamoDto: UpdateReclamoDto) {
+    return this.reclamoService.update(id, updateReclamoDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.reclamoService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\reclamo\reclamo.module.ts">
+import { Module } from '@nestjs/common';
+import { ReclamoService } from './reclamo.service';
+import { ReclamoController } from './reclamo.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Reclamo, ReclamoSchema } from './schemas/reclamo.schema';
+import { ReclamoRepository } from './reclamo.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Reclamo.name, schema: ReclamoSchema }]),
+  ],
+  controllers: [ReclamoController],
+  providers: [
+    ReclamoService,
+    {
+      provide: 'IReclamoRepository',
+      useClass: ReclamoRepository,
+    },
+  ],
+  exports: [ReclamoService],
+})
+export class ReclamoModule {}
+
+</file>
+
+<file path="src\reclamo\reclamo.repository.ts">
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+import { IReclamoRepository } from "./IReclamoRepository";
+import { InjectModel } from "@nestjs/mongoose";
+import { Reclamo } from "./schemas/reclamo.schema";
+import { Model } from "mongoose";
+import { CreateReclamoDto } from "./dto/create-reclamo.dto";
+
+@Injectable()
+export class ReclamoRepository implements IReclamoRepository{
+    private readonly ENTITY_NAME = 'Reclamo';
+    private readonly logger = new Logger(ReclamoRepository.name);
+
+    constructor(
+        @InjectModel(Reclamo.name)
+        private readonly reclamoModel: Model<Reclamo>,
+    ) {}
+    
+    async create(data: CreateReclamoDto): Promise<Reclamo> {
+        try {
+            const createdReclamo = new this.reclamoModel(data);
+            return createdReclamo.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el Reclamo');
+        }
+    }
+
+    async findOne(id: string): Promise<Reclamo | null> {
+        try {
+            return this.reclamoModel.findById(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Reclamo');
+        }
+    }
+
+    async findByName(nombre: string): Promise<Reclamo | null> {
+        try {
+            return this.reclamoModel.findOne({ nombre }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el Reclamo');
+        }
+    }
+
+    async findAll(): Promise<Reclamo[]> {
+        try {
+            return this.reclamoModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los Reclamos');
+        }
+    }
+
+    async update(id: string, data: CreateReclamoDto): Promise<Reclamo | null> {
+        try {
+            return this.reclamoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar el Reclamo');
+        }
+    }
+
+    async remove(id: string): Promise<void> {
+        try {
+            await this.reclamoModel.findByIdAndDelete(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el Reclamo');
+        }
+    }
+}
+</file>
+
+<file path="src\reclamo\reclamo.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ReclamoService } from './reclamo.service';
+
+describe('ReclamoService', () => {
+  let service: ReclamoService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ReclamoService],
+    }).compile();
+
+    service = module.get<ReclamoService>(ReclamoService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\reclamo\reclamo.service.ts">
+import { Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { CreateReclamoDto } from './dto/create-reclamo.dto';
+import { UpdateReclamoDto } from './dto/update-reclamo.dto';
+import type { IReclamoRepository } from './IReclamoRepository';
+import { TipoReclamoService } from 'src/tipo_reclamo/tipo_reclamo.service';
+
+@Injectable()
+export class ReclamoService {
+  private readonly logger = new Logger(ReclamoService.name);
+
+  constructor(
+    @Inject('IReclamoRepository')
+    private readonly reclamoRepository: IReclamoRepository,
+  ) { }
+
+  async findAll() {
+    return this.reclamoRepository.findAll();
+  }
+
+  async findOne(id: string) {
+    return this.reclamoRepository.findOne(id);
+  }
+
+  async create(createReclamoDto: CreateReclamoDto) {
+    this.logger.log('Creando nuevo reclamo');
+
+    // Validar que existan las relaciones
+    // - proyecto
+    // - tipoReclamo
+    // - prioridad
+    // - nivelCriticidad
+    // - estado
+
+    return this.reclamoRepository.create(createReclamoDto);
+  }
+
+  async update(id: string, updateReclamoDto: UpdateReclamoDto) {
+    this.logger.log(`Actualizando reclamo con id ${id}`);
+    const reclamo = await this.reclamoRepository.findOne(id);
+
+    if (!reclamo) {
+      throw new InternalServerErrorException(`Reclamo con id ${id} no existe`);
+    }
+
+    return this.reclamoRepository.update(id, updateReclamoDto);
+  }
+
+  async remove(id: string) {
+    this.logger.log(`Eliminando reclamo con id ${id}`);
+    const reclamo = await this.reclamoRepository.findOne(id);
+
+    if (!reclamo) {
+      throw new InternalServerErrorException(`Reclamo con id ${id} no existe`);
+    }
+
+    return this.reclamoRepository.remove(id);
+  }
+
+}
+
+</file>
+
+<file path="src\reclamo\dto\create-reclamo.dto.ts">
+import { IsString, IsNotEmpty, IsMongoId, IsOptional, IsArray } from 'class-validator';
+
+export class CreateReclamoDto {
+    @IsString()
+    @IsNotEmpty()
+    descripcion: string;
+
+    @IsMongoId()
+    proyectoId: string;
+
+    @IsMongoId()
+    tipoReclamoId: string;
+
+    @IsMongoId()
+    prioridadId: string;
+
+    @IsMongoId()
+    nivelCriticidadId: string;
+
+    @IsMongoId()
+    estadoId: string;
+
+    @IsOptional()
+    @IsArray()
+    archivos?: string[]; // URLs o referencias a archivos adjuntos
+}
+</file>
+
+<file path="src\reclamo\dto\update-reclamo.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateReclamoDto } from './create-reclamo.dto';
+
+export class UpdateReclamoDto extends PartialType(CreateReclamoDto) {}
+
+</file>
+
+<file path="src\reclamo\schemas\reclamo.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument, Types } from 'mongoose';
+
+export type ReclamoDocument = HydratedDocument<Reclamo>;
+
+@Schema({ timestamps: true })
+export class Reclamo {
+
+  @Prop({ required: true })
+  descripcion: string;
+
+  // --- Relaciones ---
+
+  // Proyecto 1 -> * Reclamo
+  @Prop({ type: Types.ObjectId, ref: 'Proyecto', required: true })
+  proyectoId: Types.ObjectId;
+
+  // TipoReclamo 1 -> * Reclamo
+  @Prop({ type: Types.ObjectId, ref: 'TipoReclamo', required: true })
+  tipoReclamoId: Types.ObjectId;
+
+  // Prioridad 1 -> * Reclamo
+  @Prop({ type: Types.ObjectId, ref: 'Prioridad', required: true })
+  prioridadId: Types.ObjectId;
+
+  // NivelCriticidad 1 -> * Reclamo
+  @Prop({ type: Types.ObjectId, ref: 'NivelCriticidad', required: true })
+  nivelCriticidadId: Types.ObjectId;
+
+  // Estado 1 -> * Reclamo
+  @Prop({ type: Types.ObjectId, ref: 'Estado', required: true })
+  estadoId: Types.ObjectId;
+
+  // Acciones del Reclamo (1 -> *)
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Accion' }] })
+  acciones: Types.ObjectId[];
+}
+
+export const ReclamoSchema = SchemaFactory.createForClass(Reclamo);
+
+</file>
+
+<file path="src\rol\IRolRepository.ts">
+import { CreateRolDto } from "./dto/create-rol.dto";
+import { UpdateRolDto } from "./dto/update-rol.dto";
+import { Rol } from "./schema/rol.schema";
+
+export interface IRolRepository{
+    create(data: CreateRolDto) : Promise<Rol>;
+    findOne(id: string) : Promise<Rol | null>;
+    findAll() : Promise<Rol[]>;
+    update(id: string, data: UpdateRolDto) : Promise<Rol | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\rol\rol.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { RolController } from './rol.controller';
+import { RolService } from './rol.service';
+
+describe('RolController', () => {
+  let controller: RolController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [RolController],
+      providers: [RolService],
+    }).compile();
+
+    controller = module.get<RolController>(RolController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\rol\rol.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { RolService } from './rol.service';
+import { CreateRolDto } from './dto/create-rol.dto';
+import { UpdateRolDto } from './dto/update-rol.dto';
+
+@Controller('rol')
+export class RolController {
+  constructor(private readonly rolService: RolService) {}
+
+  @Post()
+  create(@Body() createRolDto: CreateRolDto) {
+    return this.rolService.create(createRolDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.rolService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.rolService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateRolDto: UpdateRolDto) {
+    return this.rolService.update(+id, updateRolDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.rolService.remove(+id);
+  }
+}
+
+</file>
+
+<file path="src\rol\rol.module.ts">
+import { Module } from '@nestjs/common';
+import { RolService } from './rol.service';
+import { RolController } from './rol.controller';
+import { Mongoose } from 'mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Rol, RolSchema } from './schema/rol.schema';
+import { RolRepository } from './rol.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Rol.name, schema: RolSchema }]),
+  ],
+  controllers: [RolController],
+  providers: [RolService,
+    {
+      provide: 'IRolRepository',
+      useClass: RolRepository,
+    }
+  ],
+  exports: [RolService],
+})
+export class RolModule {}
+
+</file>
+
+<file path="src\rol\rol.repository.ts">
+import { Injectable, Logger } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Rol, RolDocument } from "./schema/rol.schema";
+import { Model } from "mongoose";
+import { CreateRolDto } from "./dto/create-rol.dto";
+
+@Injectable()
+export class RolRepository {
+    private readonly logger = new Logger(RolRepository.name);
+    private readonly ENTITY_NAME = 'Rol';
+
+    constructor(
+        @InjectModel(Rol.name)
+        private readonly rolModel: Model<RolDocument>,
+    ) {}
+
+    async create(data: CreateRolDto): Promise<Rol> {
+        const createdRol = new this.rolModel(data);
+        return createdRol.save();
+    }
+
+    async findOne(id: string): Promise<Rol | null> {
+        return this.rolModel.findById(id).exec();
+    }
+
+    async findAll(): Promise<Rol[]> {
+        return this.rolModel.find().exec();
+    }
+
+    async update(id: string, data: Partial<CreateRolDto>): Promise<Rol | null> {
+        return this.rolModel.findByIdAndUpdate(id, data, { new: true }).exec();
+    }
+
+    async remove(id: string): Promise<void> {
+        await this.rolModel.findByIdAndDelete(id).exec();
+    }
+}
+</file>
+
+<file path="src\rol\rol.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { RolService } from './rol.service';
+
+describe('RolService', () => {
+  let service: RolService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [RolService],
+    }).compile();
+
+    service = module.get<RolService>(RolService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\rol\rol.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateRolDto } from './dto/create-rol.dto';
+import { UpdateRolDto } from './dto/update-rol.dto';
+import type { IRolRepository } from './IRolRepository';
+
+@Injectable()
+export class RolService {
+  private readonly logger = new Logger(RolService.name);
+
+  constructor(
+    @Inject('IRolRepository')
+    private readonly rolRepository: IRolRepository,
+  ) {}
+
+  create(createRolDto: CreateRolDto) {
+    return 'This action adds a new rol';
+  }
+
+  findAll() {
+    return `This action returns all rol`;
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} rol`;
+  }
+
+  update(id: number, updateRolDto: UpdateRolDto) {
+    return `This action updates a #${id} rol`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} rol`;
+  }
+}
+
+</file>
+
+<file path="src\rol\dto\create-rol.dto.ts">
+export class CreateRolDto {}
+
+</file>
+
+<file path="src\rol\dto\update-rol.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateRolDto } from './create-rol.dto';
+
+export class UpdateRolDto extends PartialType(CreateRolDto) {}
+
+</file>
+
+<file path="src\rol\schema\rol.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type RolDocument = HydratedDocument<Rol>;
+
+@Schema({ timestamps: true })
+export class Rol {
+
+  @Prop({ required: true })
+  nombre: string;
+}
+
+export const RolSchema = SchemaFactory.createForClass(Rol);
+
+</file>
+
+<file path="src\tipo_proyecto\ITipo_proyectoRepository.ts">
+import { CreateTipoProyectoDto } from "./dto/create-tipo_proyecto.dto";
+import { UpdateTipoProyectoDto } from "./dto/update-tipo_proyecto.dto";
+import { TipoProyecto } from "./schema/tipo_proyecto.schema";
+
+export interface ITipo_proyectoRepository {
+    create(data: CreateTipoProyectoDto) : Promise<TipoProyecto>;
+    findByID(id: string) : Promise<TipoProyecto | null>;
+    findByName (nombre: string) : Promise<TipoProyecto | null>;
+    findAll() : Promise<TipoProyecto[]>;
+    update(id: string, data: UpdateTipoProyectoDto) : Promise<TipoProyecto | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\tipo_proyecto\tipo_proyecto.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { TipoProyectoController } from './tipo_proyecto.controller';
+import { TipoProyectoService } from './tipo_proyecto.service';
+
+describe('TipoProyectoController', () => {
+  let controller: TipoProyectoController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [TipoProyectoController],
+      providers: [TipoProyectoService],
+    }).compile();
+
+    controller = module.get<TipoProyectoController>(TipoProyectoController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\tipo_proyecto\tipo_proyecto.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { TipoProyectoService } from './tipo_proyecto.service';
+import { CreateTipoProyectoDto } from './dto/create-tipo_proyecto.dto';
+import { UpdateTipoProyectoDto } from './dto/update-tipo_proyecto.dto';
+
+@Controller('tipo-proyecto')
+export class TipoProyectoController {
+  constructor(private readonly tipoProyectoService: TipoProyectoService) {}
+
+  @Post()
+  create(@Body() createTipoProyectoDto: CreateTipoProyectoDto) {
+    return this.tipoProyectoService.create(createTipoProyectoDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.tipoProyectoService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.tipoProyectoService.findById(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateTipoProyectoDto: UpdateTipoProyectoDto) {
+    return this.tipoProyectoService.update(id, updateTipoProyectoDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.tipoProyectoService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\tipo_proyecto\tipo_proyecto.module.ts">
+import { Module } from '@nestjs/common';
+import { TipoProyectoService } from './tipo_proyecto.service';
+import { TipoProyectoController } from './tipo_proyecto.controller';
+import { Mongoose } from 'mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
+import { TipoProyecto, TipoProyectoSchema } from './schema/tipo_proyecto.schema';
+import { TipoProyectoRepository } from './tipo_proyecto.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: TipoProyecto.name, schema: TipoProyectoSchema }]),
+  ],
+  controllers: [TipoProyectoController],
+  providers: [TipoProyectoService,
+    {
+      provide: 'ITipoProyectoRepository',
+      useClass: TipoProyectoRepository,
+    }
+  ],
+  exports: [TipoProyectoService],
+})
+export class TipoProyectoModule {}
+
+</file>
+
+<file path="src\tipo_proyecto\tipo_proyecto.repository.ts">
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
+import { ITipo_proyectoRepository } from "./ITipo_proyectoRepository";
+import { InjectModel } from "@nestjs/mongoose";
+import { TipoProyecto, TipoProyectoDocument } from "./schema/tipo_proyecto.schema";
+import { Model } from "mongoose";
+import { CreateTipoProyectoDto } from "./dto/create-tipo_proyecto.dto";
+
+@Injectable()
+export class TipoProyectoRepository implements ITipo_proyectoRepository{
+    private readonly ENTITY_NAME = 'TipoProyecto';
+    private readonly logger = new Logger(TipoProyectoRepository.name);
+
+    constructor(
+        @InjectModel(TipoProyecto.name)
+        private readonly tipoProyectoModel: Model<TipoProyectoDocument>,
+    ) {}
+
+    async create(data: CreateTipoProyectoDto): Promise<TipoProyecto> {
+        try {
+            const createdTipoProyecto = new this.tipoProyectoModel(data);
+            return createdTipoProyecto.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el TipoProyecto');
+        }
+    }
+
+    async findByName(nombre: string): Promise<TipoProyecto | null> {
+        try {
+            return this.tipoProyectoModel.findOne({ nombre }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el TipoProyecto');
+        }
+    }
+
+    async findByID(id: string): Promise<TipoProyecto | null> {
+        try {
+            return this.tipoProyectoModel.findById(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el TipoProyecto');
+        }
+    }
+
+    async findAll(): Promise<TipoProyecto[]> {
+        try {
+            return this.tipoProyectoModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los TipoProyectos');
+        }
+    }
+
+    async update(id: string, data: CreateTipoProyectoDto): Promise<TipoProyecto | null> {
+        try {
+            return this.tipoProyectoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar el TipoProyecto');
+        }
+    }
+
+    async remove(id: string): Promise<void> {
+        try {
+            await this.tipoProyectoModel.findByIdAndDelete(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el TipoProyecto');
+        }
+    }
+}
+
+</file>
+
+<file path="src\tipo_proyecto\tipo_proyecto.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { TipoProyectoService } from './tipo_proyecto.service';
+
+describe('TipoProyectoService', () => {
+  let service: TipoProyectoService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [TipoProyectoService],
+    }).compile();
+
+    service = module.get<TipoProyectoService>(TipoProyectoService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\tipo_proyecto\tipo_proyecto.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateTipoProyectoDto } from './dto/create-tipo_proyecto.dto';
+import { UpdateTipoProyectoDto } from './dto/update-tipo_proyecto.dto';
+import type { ITipo_proyectoRepository } from './ITipo_proyectoRepository';
+
+@Injectable()
+export class TipoProyectoService {
+  private readonly logger = new Logger(TipoProyectoService.name);
+  private readonly ENTITY_NAME = 'TipoProyecto';
+
+  constructor(
+    @Inject('ITipoProyectoRepository')
+    private readonly tipoProyectoRepository: ITipo_proyectoRepository,
+  ) {}
+  
+  async create(createTipoProyectoDto: CreateTipoProyectoDto) {
+    this.logger.log(`Creando un nuevo ${this.ENTITY_NAME} con nombre ${createTipoProyectoDto.nombre}`, );
+    await this.validarExisteNombre (createTipoProyectoDto.nombre);
+    const entity = await this.tipoProyectoRepository.create(createTipoProyectoDto);
+    return entity;
+  }
+
+  async findAll() {
+    this.logger.log(`Buscando ${this.ENTITY_NAME}s`, );
+    const entities = await this.tipoProyectoRepository.findAll();
+    return entities;
+  }
+
+  async findById(id: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`, );
+    const entity =  await this.tipoProyectoRepository.findByID(id);
+    return entity;
+  }
+
+  async update(id: string, updateTipoProyectoDto: UpdateTipoProyectoDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    await this.findById(id);
+    const entity = await this.tipoProyectoRepository.update(id, updateTipoProyectoDto);
+    return entity;
+  }
+
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    return this.tipoProyectoRepository.remove(id);
+  }
+
+  private async validarExisteNombre(nombre: string): Promise<void> {
+    const existingTipoReclamo = await this.tipoProyectoRepository.findByName(nombre);
+    if (existingTipoReclamo) {
+      this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new Error(`El nombre ${nombre} ya existe.`);
+  }
+
+}
+}
+
+</file>
+
+<file path="src\tipo_proyecto\dto\create-tipo_proyecto.dto.ts">
+import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsString } from 'class-validator';
+
+export class CreateTipoProyectoDto {
+
+    @Transform(({ value }) => value.trim().toLowerCase())
+    @IsString()
+    @IsNotEmpty({message: 'El nombre no debe estar vacío'})
+    nombre: string;
+}
+
+</file>
+
+<file path="src\tipo_proyecto\dto\update-tipo_proyecto.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateTipoProyectoDto } from './create-tipo_proyecto.dto';
+
+export class UpdateTipoProyectoDto extends PartialType(CreateTipoProyectoDto) {}
+
+</file>
+
+<file path="src\tipo_proyecto\schema\tipo_proyecto.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type TipoProyectoDocument = HydratedDocument<TipoProyecto>;
+
+@Schema({ timestamps: true })
+export class TipoProyecto {
+
+  @Prop({ required: true })
+  nombre: string;
+
+}
+
+export const TipoProyectoSchema = SchemaFactory.createForClass(TipoProyecto);
+
+</file>
+
+<file path="src\tipo_reclamo\ITipo_reclamoRepository.ts">
+import { CreateTipoReclamoDto } from "./dto/create-tipo_reclamo.dto";
+import { UpdateTipoReclamoDto } from "./dto/update-tipo_reclamo.dto";
+import { TipoReclamo } from "./schema/tipo_reclamo.schema";
+
+export interface ITipoReclamoRepository {
+    create (data: CreateTipoReclamoDto) : Promise<TipoReclamo>;
+    findByName (nombre: string) : Promise<TipoReclamo | null>;
+    findById (id: string) : Promise<TipoReclamo | null>;
+    findAll () : Promise<TipoReclamo[]>;
+    update (id: string, data: UpdateTipoReclamoDto) : Promise<TipoReclamo | null>;
+    remove (id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\tipo_reclamo\tipo_reclamo.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { TipoReclamoController } from './tipo_reclamo.controller';
+import { TipoReclamoService } from './tipo_reclamo.service';
+
+describe('TipoReclamoController', () => {
+  let controller: TipoReclamoController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [TipoReclamoController],
+      providers: [TipoReclamoService],
+    }).compile();
+
+    controller = module.get<TipoReclamoController>(TipoReclamoController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\tipo_reclamo\tipo_reclamo.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { TipoReclamoService } from './tipo_reclamo.service';
+import { CreateTipoReclamoDto } from './dto/create-tipo_reclamo.dto';
+import { UpdateTipoReclamoDto } from './dto/update-tipo_reclamo.dto';
+
+@Controller('tipo-reclamo')
+export class TipoReclamoController {
+  constructor(private readonly tipoReclamoService: TipoReclamoService) {}
+
+  @Post()
+  create(@Body() createTipoReclamoDto: CreateTipoReclamoDto) {
+    return this.tipoReclamoService.create(createTipoReclamoDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.tipoReclamoService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.tipoReclamoService.findById(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateTipoReclamoDto: UpdateTipoReclamoDto) {
+    return this.tipoReclamoService.update(id, updateTipoReclamoDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.tipoReclamoService.remove(id);
+  }
+}
+
+</file>
+
+<file path="src\tipo_reclamo\tipo_reclamo.module.ts">
+import { Module } from '@nestjs/common';
+import { TipoReclamoService } from './tipo_reclamo.service';
+import { TipoReclamoController } from './tipo_reclamo.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { TipoReclamo, TipoReclamoSchema } from './schema/tipo_reclamo.schema';
+import { TipoReclamoRepository } from './tipo_reclamo.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: TipoReclamo.name, schema: TipoReclamoSchema}]),
+  ],
+  controllers: [TipoReclamoController],
+  providers: [TipoReclamoService,
+    {
+      provide: 'ITipoReclamoRepository',
+      useClass: TipoReclamoRepository,
+    }
+  ],
+  exports: [TipoReclamoService],
+})
+export class TipoReclamoModule {}
+
+</file>
+
+<file path="src\tipo_reclamo\tipo_reclamo.repository.ts">
+import { InternalServerErrorException, Logger } from "@nestjs/common";
+import { ITipoReclamoRepository } from "./ITipo_reclamoRepository";
+import { CreateTipoReclamoDto } from "./dto/create-tipo_reclamo.dto";
+import { TipoReclamo, TipoReclamoDocument } from "./schema/tipo_reclamo.schema";
+import { UpdateTipoReclamoDto } from "./dto/update-tipo_reclamo.dto";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+
+export class TipoReclamoRepository implements ITipoReclamoRepository{
+    private readonly ENTITY_NAME = 'TipoReclamo';
+    private readonly logger = new Logger(TipoReclamoRepository.name);
+
+    constructor(
+        @InjectModel(TipoReclamo.name)
+        private readonly tipoReclamoModel: Model<TipoReclamoDocument>,
+    ) {}
+
+    async create(data: CreateTipoReclamoDto): Promise<TipoReclamo> {
+        try {
+            const nueva = new this.tipoReclamoModel(data);
+            return await nueva.save();
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear el TipoReclamo');
+        }
+    }
+
+
+    async findByName(nombre: string): Promise<TipoReclamo | null> {
+        try {
+            return this.tipoReclamoModel.findOne({ nombre }).exec();
+        }catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el TipoReclamo');
+        }
+    }
+
+    async findById(id: string): Promise<TipoReclamo | null> {
+        try {
+            return this.tipoReclamoModel.findOne({ id }).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar el TipoReclamo');
+        }
+    }
+
+    async findAll(): Promise<TipoReclamo[]> {
+        try {
+            return this.tipoReclamoModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar los TipoReclamos');
+        }
+    }
+
+    async update(id: string, data: UpdateTipoReclamoDto): Promise<TipoReclamo | null> {
+        try {
+            return this.tipoReclamoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+        } catch (error) {
+        this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+        throw new InternalServerErrorException('Error al actualizar el TipoReclamo');
+        }
+    }
+
+    async remove(id: string): Promise<void> {
+        try {
+            await this.tipoReclamoModel.findOneAndDelete({ _id: id }).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar el TipoReclamo');
+        }
+    }
+
+}
+</file>
+
+<file path="src\tipo_reclamo\tipo_reclamo.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { TipoReclamoService } from './tipo_reclamo.service';
+
+describe('TipoReclamoService', () => {
+  let service: TipoReclamoService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [TipoReclamoService],
+    }).compile();
+
+    service = module.get<TipoReclamoService>(TipoReclamoService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\tipo_reclamo\tipo_reclamo.service.ts">
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { CreateTipoReclamoDto } from './dto/create-tipo_reclamo.dto';
+import { UpdateTipoReclamoDto } from './dto/update-tipo_reclamo.dto';
+import type { ITipoReclamoRepository } from './ITipo_reclamoRepository';
+
+
+@Injectable()
+export class TipoReclamoService {
+  private readonly logger = new Logger(TipoReclamoService.name);
+  private readonly ENTITY_NAME = 'TipoReclamo';
+
+  constructor(
+    @Inject('ITipoReclamoRepository')
+    private readonly tipoReclamoRepository: ITipoReclamoRepository,
+  ) {}
+
+  async create(createTipoReclamoDto: CreateTipoReclamoDto){
+    this.logger.log(`Creando un nuevo ${this.ENTITY_NAME} con nombre ${createTipoReclamoDto.nombre}`, );
+    await this.validarExisteNombre (createTipoReclamoDto.nombre);
+    const entity = await this.tipoReclamoRepository.create(createTipoReclamoDto);
+    return entity;
+  }
+
+  async findAll() {
+    this.logger.log(`Buscando ${this.ENTITY_NAME}s`, );
+    const entities = await this.tipoReclamoRepository.findAll();
+    return entities;
+  }
+
+  async findById(id: string){
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`, );
+    const entity =  await this.tipoReclamoRepository.findById(id);
+    return entity;
+  }
+
+  async update(id: string, updateTipoReclamoDto: UpdateTipoReclamoDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    await this.findById(id);
+    const entity = await this.tipoReclamoRepository.update(id, updateTipoReclamoDto);
+    return entity;
+  }
+
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    return this.tipoReclamoRepository.remove(id);
+  }
+
+  private async validarExisteNombre(nombre: string): Promise<void> {
+    const existingTipoReclamo = await this.tipoReclamoRepository.findByName(nombre);
+    if (existingTipoReclamo) {
+      this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new Error(`El nombre ${nombre} ya existe.`);
+    }
+  }
+
+    private async validarNoExisteNombre(nombre: string): Promise<void> {
+    const existing = await this.tipoReclamoRepository.findByName(nombre);
+    if (!existing) {
+      throw new NotFoundException(`No existe un TipoReclamo con nombre: ${nombre}`);
+    }
+  }
+}
+
+</file>
+
+<file path="src\tipo_reclamo\dto\create-tipo_reclamo.dto.ts">
+import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsString } from 'class-validator';
+
+export class CreateTipoReclamoDto {
+
+    @Transform(({ value }) => value.trim().toLowerCase())
+    @IsString()
+    @IsNotEmpty({message: 'El nombre no debe estar vacío'})
+    nombre: string;
+}
+
+</file>
+
+<file path="src\tipo_reclamo\dto\tipo_reclamo.dto.ts">
+export class TipoReclamoDto{
+    id: string;
+    nombre: string;
+}
+</file>
+
+<file path="src\tipo_reclamo\dto\update-tipo_reclamo.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateTipoReclamoDto } from './create-tipo_reclamo.dto';
+
+export class UpdateTipoReclamoDto extends PartialType(CreateTipoReclamoDto) {}
+
+</file>
+
+<file path="src\tipo_reclamo\schema\tipo_reclamo.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type TipoReclamoDocument = HydratedDocument<TipoReclamo>;
+
+@Schema({ timestamps: true })
+export class TipoReclamo {
+
+  @Prop({ required: true })
+  nombre: string;
+}
+
+export const TipoReclamoSchema = SchemaFactory.createForClass(TipoReclamo);
+
+</file>
+
+<file path="src\usuario\IUsuarioRepository.ts">
+import { CreateUsuarioDto } from "./dto/create-usuario.dto";
+import { UpdateUsuarioDto } from "./dto/update-usuario.dto";
+import { Usuario } from "./schema/usuario.schema";
+
+export interface IUsuarioRepository {
+    create(data: CreateUsuarioDto) : Promise<Usuario>;
+    findOne(id: string) : Promise<Usuario | null>;
+    findAll() : Promise<Usuario[]>;
+    update(id: string, data: UpdateUsuarioDto) : Promise<Usuario | null>;
+    remove(id: string) : Promise<void>;
+}
+</file>
+
+<file path="src\usuario\usuario.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { UsuarioController } from './usuario.controller';
+import { UsuarioService } from './usuario.service';
+
+describe('UsuarioController', () => {
+  let controller: UsuarioController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [UsuarioController],
+      providers: [UsuarioService],
+    }).compile();
+
+    controller = module.get<UsuarioController>(UsuarioController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\usuario\usuario.controller.ts">
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UsuarioService } from './usuario.service';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+
+@Controller('usuario')
+export class UsuarioController {
+  constructor(private readonly usuarioService: UsuarioService) {}
+
+  @Post()
+  create(@Body() createUsuarioDto: CreateUsuarioDto) {
+    return this.usuarioService.create(createUsuarioDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.usuarioService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.usuarioService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuarioService.update(+id, updateUsuarioDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.usuarioService.remove(+id);
+  }
+}
+
+</file>
+
+<file path="src\usuario\usuario.module.ts">
+import { Module } from '@nestjs/common';
+import { UsuarioService } from './usuario.service';
+import { UsuarioController } from './usuario.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Usuario, UsuarioSchema } from './schema/usuario.schema';
+import { UsuarioRepository } from './usuario.repository';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: Usuario.name, schema: UsuarioSchema}]),
+  ],
+  controllers: [UsuarioController],
+  providers: [UsuarioService,
+    {
+      provide: 'IUsuarioRepository',
+      useClass: UsuarioRepository,
+    }
+  ],
+  exports: [UsuarioService],
+})
+export class UsuarioModule {}
+
+</file>
+
+<file path="src\usuario\usuario.repository.ts">
+import { Injectable, Logger } from "@nestjs/common";
+import { IUsuarioRepository } from "./IUsuarioRepository";
+import { CreateUsuarioDto } from "./dto/create-usuario.dto";
+import { Usuario, UsuarioDocument } from "./schema/usuario.schema";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+
+@Injectable()
+export class UsuarioRepository implements IUsuarioRepository {
+    private readonly ENTITY_NAME = 'Usuario';
+    private readonly logger = new Logger(UsuarioRepository.name);
+
+    constructor(
+        @InjectModel(Usuario.name)
+        private readonly usuarioModel: Model<UsuarioDocument>,
+    ) {}
+
+    async create(data: CreateUsuarioDto): Promise<Usuario> {
+        const createdUsuario = new this.usuarioModel(data);
+        return createdUsuario.save();
+    }
+
+    async findOne(id: string): Promise<Usuario | null> {
+        return this.usuarioModel.findById(id).exec();
+    }
+
+    async findAll(): Promise<Usuario[]> {
+        return this.usuarioModel.find().exec();
+    }
+
+    async update(id: string, data: CreateUsuarioDto): Promise<Usuario | null> {
+        return this.usuarioModel.findByIdAndUpdate(id, data, { new: true }).exec();
+    }
+
+    async remove(id: string): Promise<void> {
+        await this.usuarioModel.findByIdAndDelete(id).exec();
+    }
+}
+
+
+</file>
+
+<file path="src\usuario\usuario.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { UsuarioService } from './usuario.service';
+
+describe('UsuarioService', () => {
+  let service: UsuarioService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [UsuarioService],
+    }).compile();
+
+    service = module.get<UsuarioService>(UsuarioService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+
+</file>
+
+<file path="src\usuario\usuario.service.ts">
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import type { IUsuarioRepository } from './IUsuarioRepository';
+
+@Injectable()
+export class UsuarioService {
+  private readonly logger = new Logger(UsuarioService.name);
+
+  constructor(
+    @Inject('IUsuarioRepository')
+    private readonly usuarioRepository: IUsuarioRepository,
+  ) {}
+
+  create(createUsuarioDto: CreateUsuarioDto) {
+    return 'This action adds a new usuario';
+  }
+
+  findAll() {
+    return `This action returns all usuario`;
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} usuario`;
+  }
+
+  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
+    return `This action updates a #${id} usuario`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} usuario`;
+  }
+}
+
+</file>
+
+<file path="src\usuario\dto\create-usuario.dto.ts">
+export class CreateUsuarioDto {}
+
+</file>
+
+<file path="src\usuario\dto\update-usuario.dto.ts">
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateUsuarioDto } from './create-usuario.dto';
+
+export class UpdateUsuarioDto extends PartialType(CreateUsuarioDto) {}
+
+</file>
+
+<file path="src\usuario\schema\usuario.schema.ts">
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument, Types } from 'mongoose';
+
+export type UsuarioDocument = HydratedDocument<Usuario>;
+
+@Schema({ timestamps: true })
+export class Usuario {
+
+  @Prop({ required: true })
+  nombre: string;
+
+  @Prop({ required: true })
+  apellido: string;
+
+  @Prop({ required: true, unique: true })
+  email: string;
+
+  @Prop({ required: true })
+  password: [REDACTED]
+
+  // --- Relaciones ---
+
+  // Rol 1 -> * Usuario
+  @Prop({ type: Types.ObjectId, ref: 'Rol', required: true })
+  rolId: Types.ObjectId;
+
+  // Area 1 -> * Usuario
+  @Prop({ type: Types.ObjectId, ref: 'Area', required: true })
+  areaId: Types.ObjectId;
+}
+
+export const UsuarioSchema = SchemaFactory.createForClass(Usuario);
+
+</file>
+
+<file path="test\app.e2e-spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { INestApplication } from '@nestjs/common';
+import request from 'supertest';
+import { App } from 'supertest/types';
+import { AppModule } from './../src/app.module';
+
+describe('AppController (e2e)', () => {
+  let app: INestApplication<App>;
+
+  beforeEach(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
+
+  it('/ (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(200)
+      .expect('Hello World!');
+  });
+});
+
+</file>
+
+<file path="test\jest-e2e.json">
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  }
+}
+
+</file>
+
