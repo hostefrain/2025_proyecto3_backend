@@ -15,8 +15,14 @@ import { AreaModule } from './area/area.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { RolModule } from './rol/rol.module';
 
+import { MulterModule } from '@nestjs/platform-express';
+
 @Module({
   imports: [
+    MulterModule.register({
+      limits: { fileSize: 8 * 1024 * 1024 }, // 8MB
+    }),
+    
     // 👇 Cargar variables .env globalmente
     ConfigModule.forRoot({
       isGlobal: true,

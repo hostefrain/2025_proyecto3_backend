@@ -3,9 +3,9 @@ import { UpdateReclamoDto } from "./dto/update-reclamo.dto";
 import { Reclamo } from "./schemas/reclamo.schema";
 
 export interface IReclamoRepository {
-    create(data: CreateReclamoDto) : Promise<Reclamo>;
+    create(data: CreateReclamoDto, archivos: string[], imagenes: string[]) : Promise<Reclamo>;
     findOne(id: string) : Promise<Reclamo | null>;
     findAll() : Promise<Reclamo[]>;
-    update(id: string, data: UpdateReclamoDto) : Promise<Reclamo | null>;
+    update(id: string, data: UpdateReclamoDto, archivos: string[], imagenes: string[]) : Promise<Reclamo | null>;
     remove(id: string) : Promise<void>;
 }
