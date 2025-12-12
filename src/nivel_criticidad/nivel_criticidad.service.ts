@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateNivelCriticidadDto } from './dto/create-nivel_criticidad.dto';
 import { UpdateNivelCriticidadDto } from './dto/update-nivel_criticidad.dto';
 import type { INivelCriticidadRepository } from './INivel_criticidadRepository';
@@ -26,7 +26,15 @@ export class NivelCriticidadService {
   }
 
   async findOne(id: string) {
-    return `This action returns a #${id} nivelCriticidad`;
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con ID: ${id} `,)
+
+    const nivel_criticidad = await this.nivelCriticidadRepository.findOne(id);
+
+    if (!nivel_criticidad) {
+      throw new NotFoundException(`No existe un Nivel de Criticidad con id: ${id}`);
+    }
+
+    return nivel_criticidad;
   }
 
   async update(id: string, updateNivelCriticidadDto: UpdateNivelCriticidadDto) {

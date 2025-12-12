@@ -37,7 +37,7 @@ export class TipoReclamoRepository implements ITipoReclamoRepository{
 
     async findById(id: string): Promise<TipoReclamo | null> {
         try {
-            return this.tipoReclamoModel.findOne({ id }).exec();
+            return this.tipoReclamoModel.findById(id).exec();
         } catch (error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
             throw new InternalServerErrorException('Error al buscar el TipoReclamo');

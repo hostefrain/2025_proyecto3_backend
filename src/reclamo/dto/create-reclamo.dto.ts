@@ -1,34 +1,29 @@
-import {
-  IsMongoId,
-  IsOptional,
-  IsArray,
-  IsString,
-  IsNumber,
-  IsNotEmpty,
-  IsDateString,
-} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsMongoId, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateReclamoDto {
-    @IsString()
-    @IsNotEmpty()
-    descripcion: string;
 
-    @IsMongoId()
-    proyectoId: string;
+  @IsString()
+  @IsNotEmpty()
+  descripcion: string;
 
-    @IsMongoId()
-    tipoReclamoId: string;
+  @IsMongoId()
+  @IsNotEmpty()
+  proyectoId: string;
 
-    @IsMongoId()
-    prioridadId: string;
+  @IsMongoId()
+  @IsNotEmpty()
+  tipoReclamoId: string;
 
-    @IsMongoId()
-    nivelCriticidadId: string;
+  @IsMongoId()
+  @IsNotEmpty()
+  prioridadId: string;
 
-    @IsMongoId()
-    estadoId: string;
+  @IsMongoId()
+  @IsNotEmpty()
+  nivelCriticidadId: string;
 
-    @IsOptional()
-    @IsArray()
-    archivos?: string[];
+  @IsMongoId()
+  @IsNotEmpty()
+  estadoId: string;
 }

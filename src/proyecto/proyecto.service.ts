@@ -52,8 +52,8 @@ export class ProyectoService {
 
   async update(id: string, updateProyectoDto: UpdateProyectoDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
-    const reclamo = await this.proyectoRepository.findOne(id);
-    if (!reclamo) {
+    const proyecto = await this.proyectoRepository.findOne(id);
+    if (!proyecto) {
       this.logger.error(`Proyecto con id ${id} no existe`);
       throw new InternalServerErrorException(`Proyecto con id ${id} no existe`);
     }

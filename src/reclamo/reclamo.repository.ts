@@ -16,14 +16,20 @@ export class ReclamoRepository implements IReclamoRepository{
         private readonly reclamoModel: Model<Reclamo>,
     ) {}
     
-    async create(data: CreateReclamoDto): Promise<Reclamo> {
-        try {
-            const createdReclamo = new this.reclamoModel(data);
-            return createdReclamo.save();
-        } catch (error) {
-            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
-            throw new InternalServerErrorException('Error al crear el Reclamo');
-        }
+    async create(data: CreateReclamoDto, archivos: string[], imagenes: string[]): Promise<Reclamo> {
+    try {
+        const createdReclamo = new this.reclamoModel({
+        ...data,
+        archivos,
+        imagenes,
+        });
+
+        return await createdReclamo.save();
+
+    } catch (error) {
+        this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+        throw new InternalServerErrorException('Error al crear el Reclamo');
+    }
     }
 
     async findOne(id: string): Promise<Reclamo | null> {
@@ -44,13 +50,27 @@ export class ReclamoRepository implements IReclamoRepository{
         }
     }
 
-    async update(id: string, data: UpdateReclamoDto): Promise<Reclamo | null> {
-        try {
-            return this.reclamoModel.findByIdAndUpdate(id, data, { new: true }).exec();
-        } catch (error) {
-            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
-            throw new InternalServerErrorException('Error al actualizar el Reclamo');
-        }
+    async update(
+    id: string,
+    data: UpdateReclamoDto,
+    archivos: string[],
+    imagenes: string[],
+    ): Promise<Reclamo | null> {
+    try {
+        return await this.reclamoModel.findByIdAndUpdate(
+        id,
+        {
+            ...data,
+            ...(archivos.length > 0 && { archivos }),
+            ...(imagenes.length > 0 && { imagenes }),
+        },
+        { new: true },
+        ).exec();
+
+    } catch (error) {
+        this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+        throw new InternalServerErrorException('Error al actualizar el Reclamo');
+    }
     }
 
     async remove(id: string): Promise<void> {
