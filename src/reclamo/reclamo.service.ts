@@ -20,12 +20,7 @@ export class ReclamoService {
     private estadoService: EstadoService,
     private proyectoService: ProyectoService,
     @Inject('IReclamoRepository')
-    private readonly reclamoRepository: IReclamoRepository,
-    private readonly proyectoService: ProyectoService,
-    private readonly tipoReclamoService: TipoReclamoService,
-    private readonly prioridadService: PrioridadService,
-    private readonly nivelCriticidadService: NivelCriticidadService,
-    private readonly estadoService: EstadoService,
+    private readonly reclamoRepository: IReclamoRepository
   ) {}
 
   async create(createReclamoDto: CreateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
