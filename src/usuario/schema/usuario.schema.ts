@@ -10,13 +10,7 @@ export class Usuario {
   nombre: string;
 
   @Prop({ required: true })
-  apellido: string;
-
-  @Prop({ required: true, unique: true })
-  email: string;
-
-  @Prop({ required: true })
-  password: string;
+  contrasena: string;
 
   // --- Relaciones ---
 

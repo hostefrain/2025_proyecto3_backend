@@ -37,6 +37,10 @@ export class Reclamo {
   @Prop({ type: Types.ObjectId, ref: 'Estado', required: true })
   estadoId: Types.ObjectId;
 
+  @IsMongoId()
+  @Prop({ type: Types.ObjectId, ref: 'Area', required: true })
+  areaId: Types.ObjectId;
+
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Accion' }] })
   acciones: Types.ObjectId[];
 }

@@ -3,6 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Estado, EstadoDocument } from "./schemas/estado.schema";
 import { Model } from "mongoose";
 import { IEstadoRepository } from "./IEstadoRepository";
+import { CreateEstadoDto } from "./dto/create-estado.dto";
 
 @Injectable()
 export class EstadoRepository implements IEstadoRepository {
@@ -14,7 +15,7 @@ export class EstadoRepository implements IEstadoRepository {
         private readonly estadoModel: Model<EstadoDocument>,
     ) {}
 
-    async create(data: Partial<Estado>): Promise<Estado> {
+    async create(data: CreateEstadoDto): Promise<Estado> {
         try {
             const createdEstado = new this.estadoModel(data);
             return createdEstado.save();

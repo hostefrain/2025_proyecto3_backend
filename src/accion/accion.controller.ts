@@ -19,16 +19,16 @@ export class AccionController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.accionService.findOne(+id);
+    return this.accionService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccionDto: UpdateAccionDto) {
-    return this.accionService.update(+id, updateAccionDto);
+  update(@Param('id') id: string, @Body() updateAccionDto: UpdateAccionDto, areaOrigenId: string, estadoActualId: string) {
+    return this.accionService.update(id, updateAccionDto, areaOrigenId, estadoActualId);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.accionService.remove(+id);
+    return this.accionService.remove(id);
   }
 }

@@ -7,6 +7,7 @@ import { PrioridadService } from 'src/prioridad/prioridad.service';
 import { NivelCriticidadService } from 'src/nivel_criticidad/nivel_criticidad.service';
 import { EstadoService } from 'src/estado/estado.service';
 import { ProyectoService } from 'src/proyecto/proyecto.service';
+import { AreaService } from 'src/area/area.service';
 
 @Injectable()
 export class ReclamoService {
@@ -19,6 +20,7 @@ export class ReclamoService {
     private nivelCriticidadService: NivelCriticidadService,
     private estadoService: EstadoService,
     private proyectoService: ProyectoService,
+    private areaService: AreaService,
     @Inject('IReclamoRepository')
     private readonly reclamoRepository: IReclamoRepository
   ) {}
@@ -46,6 +48,12 @@ export class ReclamoService {
     if (!estado) {
       this.logger.error(`Estado con id: ${createReclamoDto.estadoId} no existe`);
       throw new NotFoundException('Estado no existe')
+    }
+
+    const area = await this.areaService.findOne(createReclamoDto.areaId)
+    if (!area) {
+      this.logger.error(`Area con id: ${createReclamoDto.areaId} no existe`);
+      throw new NotFoundException('Area no existe')
     }
 
     const proyecto = await this.proyectoService.findOne(createReclamoDto.proyectoId);

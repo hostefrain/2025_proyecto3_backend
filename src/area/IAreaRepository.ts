@@ -5,7 +5,8 @@ import { Area } from "./schemas/area.schema";
 export interface IAreaRepository {
     create(data: CreateAreaDto) : Promise<Area>;
     findOne(id: string) : Promise<Area | null>;
+    findByName(nombre: string) : Promise<Area | null>;
     findAll() : Promise<Area[]>;
-    update(id: string, data: Partial<UpdateAreaDto>) : Promise<Area | null>;
+    update(id: string, data: UpdateAreaDto) : Promise<Area | null>;
     remove(id: string) : Promise<void>;
 }

@@ -9,6 +9,7 @@ import { PrioridadModule } from 'src/prioridad/prioridad.module';
 import { NivelCriticidadModule } from 'src/nivel_criticidad/nivel_criticidad.module';
 import { EstadoModule } from 'src/estado/estado.module';
 import { ProyectoModule } from 'src/proyecto/proyecto.module';
+import { AreaModule } from 'src/area/area.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ProyectoModule } from 'src/proyecto/proyecto.module';
     NivelCriticidadModule,
     EstadoModule,
     ProyectoModule,
+    AreaModule,
   ],
   controllers: [ReclamoController],
   providers: [

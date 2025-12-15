@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
 import type{ IAreaRepository } from './IAreaRepository';
@@ -6,28 +6,44 @@ import type{ IAreaRepository } from './IAreaRepository';
 @Injectable()
 export class AreaService {
   private readonly logger = new Logger(AreaService.name);
+  private readonly ENTITY_NAME = 'Area';
   
   constructor(
     @Inject('IAreaRepository') 
     private readonly areaRepository: IAreaRepository,
   ) {}
-  create(createAreaDto: CreateAreaDto) {
-    return 'This action adds a new area';
+
+  async create(createAreaDto: CreateAreaDto) {
+    this.logger.log(`Creando un nuevo ${this.ENTITY_NAME} con nombre: ${createAreaDto.nombre}`, );
+
+    const area = await this.areaRepository.findByName(createAreaDto.nombre)
+
+    if (area) {
+      this.logger.error(`Area con nombre ${createAreaDto.nombre} ya existe`);
+      throw new InternalServerErrorException(`Area con nombre ${createAreaDto.nombre} ya existe`);
+    }
+
+    return this.areaRepository.create(createAreaDto);
+
   }
 
-  findAll() {
-    return `This action returns all area`;
+  async findAll() {
+    this.logger.log(`Buscando ${this.ENTITY_NAME}s`, );
+    return this.areaRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} area`;
+  async findOne(id: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con ID: ${id} `,);
+    return this.areaRepository.findOne(id);
   }
 
-  update(id: number, updateAreaDto: UpdateAreaDto) {
-    return `This action updates a #${id} area`;
+  async update(id: string, updateAreaDto: UpdateAreaDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    return this.areaRepository.update(id, updateAreaDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} area`;
+  async remove(id: string) {
+    this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    return this.areaRepository.remove(id);
   }
 }

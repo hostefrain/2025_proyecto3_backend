@@ -6,7 +6,11 @@ export type RolDocument = HydratedDocument<Rol>;
 @Schema({ timestamps: true })
 export class Rol {
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    trim: true,
+    unique: true,
+  })
   nombre: string;
 }
 

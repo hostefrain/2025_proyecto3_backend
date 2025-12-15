@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, Logger } from "@nestjs/common";
 import { Accion, AccionDocument } from "./schemas/accion.schema";
 import { InjectModel } from "@nestjs/mongoose";
 import { IAccionRepository } from "./IAccionRepository";
@@ -16,25 +16,62 @@ export class AccionRepository implements IAccionRepository {
         private readonly accionModel: Model<AccionDocument>,
     ) {}
 
-    async create(data: CreateAccionDto): Promise<Accion> {
-        const createdAccion = new this.accionModel(data);
-        return createdAccion.save();
+    async create(data: CreateAccionDto, areaOrigenId, estadoActualId): Promise<Accion> {
+        try {
+            const createdAccion = new this.accionModel({
+            ...data,
+            areaOrigenId,
+            estadoActualId,
+            });
+
+            return await createdAccion.save();
+
+        } catch (error) {
+            this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
+            throw new InternalServerErrorException('Error al crear la Accion');
+        }
     }
 
     async findOne(id: string): Promise<Accion | null> {
-        return this.accionModel.findById(id).exec();
+        try {
+            return this.accionModel.findById(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar la Accion');
+        }
     }
 
     async findAll(): Promise<Accion[]> {
-        return this.accionModel.find().exec();
+        try {
+            return this.accionModel.find().exec();
+        } catch (error) {
+            this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
+            throw new InternalServerErrorException('Error al buscar las Acciones');
+        }
     }
 
-    async update(id: string, data: UpdateAccionDto): Promise<Accion | null> {
-        return this.accionModel.findByIdAndUpdate(id, data, { new: true }).exec();
+    async update(id: string, data: UpdateAccionDto, estadoActualId: string, areaOrigenId: string ): Promise<Accion | null> {
+        try {
+            return this.accionModel.findByIdAndUpdate(id, 
+                {
+                ...data,
+                estadoActualId,
+                areaOrigenId,
+            }, 
+            { new: true }).exec();
+        } catch (error) {
+            this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al actualizar la Accion');
+        }
     }
 
     async remove(id: string): Promise<void> {
-        await this.accionModel.findByIdAndDelete(id).exec();
+        try{
+            await this.accionModel.findByIdAndDelete(id).exec();
+        } catch (error) {
+            this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
+            throw new InternalServerErrorException('Error al eliminar la Accion');
+        }
     }
 }
 

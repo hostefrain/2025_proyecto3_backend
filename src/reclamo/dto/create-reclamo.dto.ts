@@ -21,6 +21,10 @@ export class CreateReclamoDto {
 
   @IsMongoId()
   @IsNotEmpty()
+  areaId: string;
+
+  @IsMongoId()
+  @IsNotEmpty()
   nivelCriticidadId: string;
 
   @IsMongoId()
