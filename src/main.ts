@@ -2,10 +2,16 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { mkdirSync } from 'fs';
 import { join } from 'path';
+import { METHODS } from 'http';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: 'http://localhost:5173',
+    methods: 'GET,POST,PATCH,DELETE',
+    credentials: true,
+  })
   const uploadPaths = [
     join(process.cwd(), 'uploads', 'imagenes'),
     join(process.cwd(), 'uploads', 'archivos'),

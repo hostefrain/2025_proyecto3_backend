@@ -26,6 +26,8 @@ export class ReclamoService {
   ) {}
 
   async create(createReclamoDto: CreateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
+    this.logger.debug('CreateReclamoDto recibido:', createReclamoDto);
+    
     const tipoReclamo = await this.tipoReclamoService.findById(createReclamoDto.tipoReclamoId)
     if (!tipoReclamo){
       this.logger.error(`TipoReclamo con id: ${createReclamoDto.tipoReclamoId} no existe`);

@@ -43,20 +43,14 @@ export class PrioridadRepository implements IPrioridadRepository {
     }
   }
 
-    async findByName(nombre: string): Promise<Prioridad | null> {
+  async findByName(nombre: string): Promise<Prioridad | null> {
     try {
-      const prioridad = await this.prioridadModel.findOne( { nombre }).exec();
-      
-      if (!prioridad) {
-        throw new NotFoundException(`Prioridad con Nombre ${nombre} no encontrada`);
-      }
-      
-      return prioridad;
+      return await this.prioridadModel.findOne({ nombre }).exec();
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      this.logger.error(`Error buscando prioridad con nombre ${nombre}: ${error.message}`, error.stack);
+      this.logger.error(
+        `Error buscando prioridad con nombre ${nombre}: ${error.message}`,
+        error.stack,
+      );
       throw new InternalServerErrorException('Error al buscar la prioridad');
     }
   }
