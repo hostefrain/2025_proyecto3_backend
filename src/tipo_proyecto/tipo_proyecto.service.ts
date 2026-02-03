@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateTipoProyectoDto } from './dto/create-tipo_proyecto.dto';
 import { UpdateTipoProyectoDto } from './dto/update-tipo_proyecto.dto';
 import type { ITipo_proyectoRepository } from './ITipo_proyectoRepository';
@@ -34,22 +34,31 @@ export class TipoProyectoService {
 
   async update(id: string, updateTipoProyectoDto: UpdateTipoProyectoDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
-    await this.findById(id);
+    this.verificarExistenciaTipoProyecto(id);
     const entity = await this.tipoProyectoRepository.update(id, updateTipoProyectoDto);
     return entity;
   }
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    this.verificarExistenciaTipoProyecto(id);
     return this.tipoProyectoRepository.remove(id);
   }
 
   private async validarExisteNombre(nombre: string): Promise<void> {
     const existingTipoReclamo = await this.tipoProyectoRepository.findByName(nombre);
     if (existingTipoReclamo) {
-      this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
-      throw new Error(`El nombre ${nombre} ya existe.`);
+      this.logger.error(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new NotFoundException(`El nombre ${nombre} ya existe.`);
+    }
   }
 
-}
+  private async verificarExistenciaTipoProyecto(idTipoProyecto: string) : Promise<any> {
+    const tipo_proyecto = await this.tipoProyectoRepository.findByID(idTipoProyecto);
+    if (!tipo_proyecto) {
+      this.logger.error(`El id ${idTipoProyecto} no existe en ${this.ENTITY_NAME}`);
+      throw new NotFoundException(`El id ${idTipoProyecto} no existe.`);
+    }
+    return tipo_proyecto;
+  }
 }

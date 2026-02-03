@@ -8,6 +8,7 @@ import { NivelCriticidadService } from 'src/nivel_criticidad/nivel_criticidad.se
 import { EstadoService } from 'src/estado/estado.service';
 import { ProyectoService } from 'src/proyecto/proyecto.service';
 import { AreaService } from 'src/area/area.service';
+import { TipoReclamo } from 'src/tipo_reclamo/schema/tipo_reclamo.schema';
 
 @Injectable()
 export class ReclamoService {
@@ -27,41 +28,13 @@ export class ReclamoService {
 
   async create(createReclamoDto: CreateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
     this.logger.log(`Creando nuevo ${this.ENTITY_NAME}`);
-    const tipoReclamo = await this.tipoReclamoService.findById(createReclamoDto.tipoReclamoId)
-    if (!tipoReclamo){
-      this.logger.error(`TipoReclamo con id: ${createReclamoDto.tipoReclamoId} no existe`);
-      throw new NotFoundException('Tipo de Reclamo no existe')
-    }
+    this.verificarExistenciaTipoReclamo(createReclamoDto.tipoReclamoId);
+    this.verificarExistenciaPrioridad(createReclamoDto.prioridadId);
+    this.verificarExistenciaNivelCriticidad(createReclamoDto.nivelCriticidadId);
+    this.verificarExistenciaEstado(createReclamoDto.estadoId);
+    this.verificarExistenciaArea(createReclamoDto.areaId);
+    this.verificarExistenciaProyecto(createReclamoDto.proyectoId);
 
-    const prioridad = await this.prioridadService.findOne(createReclamoDto.prioridadId)
-    if (!prioridad){
-      this.logger.error(`Prioridad con id: ${createReclamoDto.prioridadId} no existe`);
-      throw new NotFoundException('Prioridad no existe')
-    }
-
-    const nivel_criticidad = await this.nivelCriticidadService.findOne(createReclamoDto.nivelCriticidadId);
-    if (!nivel_criticidad) {
-      this.logger.error(`Nivel de criticadad con id: ${createReclamoDto.nivelCriticidadId} no existe`);
-      throw new NotFoundException('Nivel de criticidad no existe')
-    }
-
-    const estado = await this.estadoService.findById(createReclamoDto.estadoId);
-    if (!estado) {
-      this.logger.error(`Estado con id: ${createReclamoDto.estadoId} no existe`);
-      throw new NotFoundException('Estado no existe')
-    }
-
-    const area = await this.areaService.findOne(createReclamoDto.areaId)
-    if (!area) {
-      this.logger.error(`Area con id: ${createReclamoDto.areaId} no existe`);
-      throw new NotFoundException('Area no existe')
-    }
-
-    const proyecto = await this.proyectoService.findOne(createReclamoDto.proyectoId);
-    if (!proyecto) {
-      this.logger.error(`Proyecto con id: ${createReclamoDto.proyectoId} no existe`);
-      throw new NotFoundException('Proyecto no existe')
-    }
     const archivosPaths = archivos?.map(a => a.filename) ?? [];
     const imagenesPaths = imagenes?.map(i => i.filename) ?? [];
 
@@ -86,11 +59,7 @@ export class ReclamoService {
 
   async update(id: string, dto: UpdateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
-    const reclamo = await this.reclamoRepository.findOne(id)
-    if (!reclamo) {
-      this.logger.error(`Proyecto con id ${id} no existe`);
-      throw new NotFoundException(`No existe un Reclamo con id: ${id}`);
-    }
+    this.verificarExistenciaReclamo(id)
     const archivosPaths = archivos?.map(a => a.filename) ?? [];
     const imagenesPaths = imagenes?.map(i => i.filename) ?? [];
 
@@ -100,11 +69,70 @@ export class ReclamoService {
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`);
-    const reclamo = await this.reclamoRepository.findOne(id)
-    if (!reclamo) {
-      this.logger.error(`Proyecto con id ${id} no existe`);
-      throw new NotFoundException(`No existe un Reclamo con id: ${id}`);
-    }
+    this.verificarExistenciaReclamo(id);
     return this.reclamoRepository.remove(id);
+  }
+
+  private async verificarExistenciaTipoReclamo(tipoReclamoId: string) {
+    const tipoReclamo = await this.tipoReclamoService.findById(tipoReclamoId);
+    if (!tipoReclamo) {
+      this.logger.error(`TipoReclamo con id: ${tipoReclamoId} no existe`);
+      throw new NotFoundException(`No existe un TipoReclamo con id: ${tipoReclamoId}`);
+    }
+    return tipoReclamo;
+  }
+
+  private async verificarExistenciaPrioridad(prioridadId: string) {
+    const prioridad = await this.prioridadService.findOne(prioridadId);
+    if (!prioridad) {
+      this.logger.error(`Prioridad con id: ${prioridadId} no existe`);
+      throw new NotFoundException(`No existe una Prioridad con id: ${prioridadId}`);
+    }
+    return prioridad;
+  }
+
+  private async verificarExistenciaNivelCriticidad(nivelCriticidadId: string) {
+    const nivelCriticidad = await this.nivelCriticidadService.findOne(nivelCriticidadId);
+    if (!nivelCriticidad) {
+      this.logger.error(`NivelCriticidad con id: ${nivelCriticidadId} no existe`);
+      throw new NotFoundException(`No existe un NivelCriticidad con id: ${nivelCriticidadId}`);
+    }
+    return nivelCriticidad;
+  }
+
+  private async verificarExistenciaEstado(estadoId: string) {
+    const estado = await this.estadoService.findById(estadoId);
+    if (!estado) {
+      this.logger.error(`Estado con id: ${estadoId} no existe`);
+      throw new NotFoundException(`No existe un Estado con id: ${estadoId}`);
+    }
+    return estado;
+  }
+
+  private async verificarExistenciaArea(areaId: string) {
+    const area = await this.areaService.findOne(areaId);
+    if (!area) {
+      this.logger.error(`Area con id: ${areaId} no existe`);
+      throw new NotFoundException(`No existe un Area con id: ${areaId}`);
+    }
+    return area;
+  }
+
+  private async verificarExistenciaProyecto(proyectoId: string) {
+    const proyecto = await this.proyectoService.findOne(proyectoId);
+    if (!proyecto) {
+      this.logger.error(`Proyecto con id: ${proyectoId} no existe`);
+      throw new NotFoundException(`No existe un Proyecto con id: ${proyectoId}`);
+    }
+    return proyecto;
+  }
+
+  private async verificarExistenciaReclamo(idReclamo: string) : Promise<any> {
+    const reclamo = await this.reclamoRepository.findOne(idReclamo);
+    if (!reclamo) {
+      this.logger.error(`El id ${idReclamo} no existe en ${this.ENTITY_NAME}`);
+      throw new NotFoundException(`El id ${idReclamo} no existe.`);
+    }
+    return reclamo;
   }
 }

@@ -35,13 +35,14 @@ export class TipoReclamoService {
 
   async update(id: string, updateTipoReclamoDto: UpdateTipoReclamoDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
-    await this.findById(id);
+    await this.validarExisteTipoReclamo(id);
     const entity = await this.tipoReclamoRepository.update(id, updateTipoReclamoDto);
     return entity;
   }
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    await this.validarExisteTipoReclamo(id);
     return this.tipoReclamoRepository.remove(id);
   }
 
@@ -53,10 +54,12 @@ export class TipoReclamoService {
     }
   }
 
-    private async validarNoExisteNombre(nombre: string): Promise<void> {
-    const existing = await this.tipoReclamoRepository.findByName(nombre);
-    if (!existing) {
-      throw new NotFoundException(`No existe un TipoReclamo con nombre: ${nombre}`);
+  private async validarExisteTipoReclamo(idTipoReclamo: string) : Promise<any> {
+    const tipo_reclamo = await this.tipoReclamoRepository.findById(idTipoReclamo);
+    if (!tipo_reclamo) {
+      this.logger.warn(`El id ${idTipoReclamo} no existe en ${this.ENTITY_NAME}`);
+      throw new NotFoundException(`El id ${idTipoReclamo} no existe.`);
     }
+    return tipo_reclamo;
   }
 }

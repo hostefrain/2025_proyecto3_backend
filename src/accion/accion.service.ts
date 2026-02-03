@@ -61,10 +61,7 @@ export class AccionService {
 async update(id: string, updateAccionDto: UpdateAccionDto) {
   this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`);
 
-  const accion = await this.accionRepository.findOne(id);
-  if (!accion) {
-    throw new NotFoundException(`No existe una Accion con id: ${id}`);
-  }
+  this.verificarExistenciaAccion(id);
 
   if (updateAccionDto.reclamoId) {
     const reclamo = await this.verificarExistenciaReclamo(updateAccionDto.reclamoId);
@@ -94,11 +91,7 @@ async update(id: string, updateAccionDto: UpdateAccionDto) {
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`);
-    const accion = await this.accionRepository.findOne(id);
-    if (!accion) {
-      this.logger.error(`${this.ENTITY_NAME} con id ${id} no existe`);
-      throw new NotFoundException(`No existe un ${this.ENTITY_NAME} con id: ${id}`);
-    }
+    this.verificarExistenciaAccion(id);
     return this.accionRepository.remove(id);
   }
 
@@ -143,5 +136,14 @@ async update(id: string, updateAccionDto: UpdateAccionDto) {
       }
 
     return estado;
+  }
+
+  private async verificarExistenciaAccion(idAccion: string) : Promise<any> {
+    const accion = await this.accionRepository.findOne(idAccion);
+    if (!accion) {
+      this.logger.error(`El id ${idAccion} no existe en ${this.ENTITY_NAME}`);
+      throw new NotFoundException(`El id ${idAccion} no existe.`);
+    }
+    return accion;
   }
 }

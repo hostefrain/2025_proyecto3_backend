@@ -17,12 +17,8 @@ export class PrioridadService {
   async create(createPrioridadDto: CreatePrioridadDto) {
     this.logger.log(`Creando un nuevo ${this.ENTITY_NAME} con nombre: ${createPrioridadDto.nombre}`, );
 
-    const prioridad = await this.findByName(createPrioridadDto.nombre)
+    this.verificarExistenciaNombre(createPrioridadDto.nombre);
 
-    if (prioridad) {
-      this.logger.error(`Prioridad con nombre ${createPrioridadDto.nombre} ya existe`);
-      throw new InternalServerErrorException(`Prioridad con nombre ${createPrioridadDto.nombre} ya existe`);
-    }
     return this.prioridadRepository.create(createPrioridadDto);
   }
 
@@ -44,11 +40,30 @@ export class PrioridadService {
 
   async update(id: string, updatePrioridadDto: UpdatePrioridadDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+    this.verificarExistenciaPrioridad(id);
     return this.prioridadRepository.update(id, updatePrioridadDto);
   }
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    this.verificarExistenciaPrioridad(id);
     return this.prioridadRepository.remove(id);
+  }
+
+  private async verificarExistenciaNombre(nombre: string): Promise<void> {
+    const existingPrioridad = await this.prioridadRepository.findByName(nombre);
+    if (existingPrioridad) {
+      this.logger.error(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
+      throw new NotFoundException(`El nombre ${nombre} ya existe.`);
+    }
+  }
+
+  private async verificarExistenciaPrioridad(idPrioridad: string) : Promise<any> {
+    const prioridad = await this.prioridadRepository.findOne(idPrioridad);
+    if (!prioridad) {
+      this.logger.error(`El id ${idPrioridad} no existe en ${this.ENTITY_NAME}`);
+      throw new NotFoundException(`El id ${idPrioridad} no existe.`);
+    }
+    return prioridad;
   }
 }
