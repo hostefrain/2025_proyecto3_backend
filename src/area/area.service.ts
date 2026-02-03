@@ -39,11 +39,36 @@ export class AreaService {
 
   async update(id: string, updateAreaDto: UpdateAreaDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
+
+    const areaEntity = await this.findOne(id);
+
+    if (!areaEntity) {
+      this.logger.error(`${this.ENTITY_NAME} con id: ${id} no existe`);
+      throw new InternalServerErrorException(`${this.ENTITY_NAME} con id: ${id} no existe`);
+    }
+
+    if (updateAreaDto.nombre) {
+      const area = await this.areaRepository.findByName(updateAreaDto.nombre)
+
+      if (area) {
+        this.logger.error(`Area con nombre ${updateAreaDto.nombre} ya existe`);
+        throw new InternalServerErrorException(`Area con nombre ${updateAreaDto.nombre} ya existe`);
+      }
+    }
+
     return this.areaRepository.update(id, updateAreaDto);
   }
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+
+    const areaEntity = await this.findOne(id);
+
+    if (!areaEntity) {
+      this.logger.error(`${this.ENTITY_NAME} con id: ${id} no existe`);
+      throw new InternalServerErrorException(`${this.ENTITY_NAME} con id: ${id} no existe`);
+    }
+    
     return this.areaRepository.remove(id);
   }
 }

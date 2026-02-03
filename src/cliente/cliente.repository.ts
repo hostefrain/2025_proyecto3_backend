@@ -31,7 +31,7 @@ export class ClienteRepository implements IClienteRepository {
             return this.clienteModel.findById(id).exec();
         } catch(error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
-            throw new InternalServerErrorException('Error al buscar el Proyecto');
+            throw new InternalServerErrorException('Error al buscar el Cliente');
         }
     }
 
@@ -40,7 +40,7 @@ export class ClienteRepository implements IClienteRepository {
             return this.clienteModel.findOne({ nombre }).exec();
         } catch(error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
-            throw new InternalServerErrorException('Error al buscar el Proyecto');
+            throw new InternalServerErrorException('Error al buscar el Cliente');
         }
     }
         
@@ -67,7 +67,7 @@ export class ClienteRepository implements IClienteRepository {
             await this.clienteModel.findByIdAndDelete(id).exec();
         } catch(error) {
             this.logger.error(`Error al eliminar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
-            throw new InternalServerErrorException('Error al eliminar el Proyecto');
+            throw new InternalServerErrorException('Error al eliminar el Cliente');
         }
     }   
 

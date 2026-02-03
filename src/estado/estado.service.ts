@@ -28,23 +28,26 @@ export class EstadoService {
 
   async findById(id: string) {
     this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`, );
-    const entity =  await this.estadoRepository.findById(id);
+
+    const entity =  await this.validarExisteId(id);
     return entity;
   }
 
   async findByName(nombre: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con nombre ${nombre}`, );
     return this.estadoRepository.findByName(nombre);
   }
 
   async update(id: string, updateEstadoDto: UpdateEstadoDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
-    await this.estadoRepository.findById(id);
+    await this.validarExisteId(id);
     const entity = await this.estadoRepository.update(id, updateEstadoDto);
     return entity;
   }
 
   async remove(id: string) {
     this .logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
+    await this.validarExisteId(id);
     return this.estadoRepository.remove(id);
   }
 
@@ -54,5 +57,16 @@ export class EstadoService {
       this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
       throw new Error(`El nombre ${nombre} ya existe.`);
     }
+  }
+
+  private async validarExisteId(idEstado: string) : Promise<any> {
+    const estado = await this.estadoRepository.findById(idEstado);
+
+    if (!estado) {
+      this.logger.warn(`${this.ENTITY_NAME} con id ${idEstado} no existe`);
+      throw new Error(`${this.ENTITY_NAME} con id ${idEstado} no existe`);
+    }
+
+    return estado;
   }
 }

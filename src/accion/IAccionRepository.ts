@@ -6,7 +6,7 @@ export interface IAccionRepository {
     create(data: CreateAccionDto, estadoActualId: string, areaOrigenId: string) : Promise<Accion>;
     findOne(id: string) : Promise<Accion | null>;
     findAll() : Promise<Accion[]>;
-    update(id: string, data: UpdateAccionDto, estadoActualId: string, areaOrigenId: string) : Promise<Accion | null>;
+    update(id: string, data: UpdateAccionDto) : Promise<Accion | null>;
     remove(id: string) : Promise<void>;
 }
 

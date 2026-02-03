@@ -23,8 +23,8 @@ export class AccionController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccionDto: UpdateAccionDto, areaOrigenId: string, estadoActualId: string) {
-    return this.accionService.update(id, updateAccionDto, areaOrigenId, estadoActualId);
+  update(@Param('id') id: string, @Body() updateAccionDto: UpdateAccionDto) {
+    return this.accionService.update(id, updateAccionDto);
   }
 
   @Delete(':id')

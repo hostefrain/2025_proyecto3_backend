@@ -2,6 +2,7 @@ import { Inject, Injectable, InternalServerErrorException, Logger } from '@nestj
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import type { IClienteRepository } from './IClienteRepository';
+import { Cliente } from './schemas/cliente.schema';
 
 @Injectable()
 export class ClienteService {
@@ -15,11 +16,7 @@ export class ClienteService {
 
   async create(createClienteDto: CreateClienteDto) {
    this.logger.log(`Creando nuevo ${this.ENTITY_NAME}`);
-   const cliente = await this.clienteRepository.findByName(createClienteDto.nombre);
-   if (cliente) {
-    this.logger.error(`Cliente con nombre: ${cliente.nombre} ya existe`)
-    throw new InternalServerErrorException(`Cliente con nombre ${cliente.nombre} ya existe`)
-   }
+   await this.validarExisteNombre(createClienteDto.nombre);
 
    return this.clienteRepository.create(createClienteDto)    
   }
@@ -31,32 +28,42 @@ export class ClienteService {
 
   async findById(id: string) {
     this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`)
-    return this.clienteRepository.findById(id)
+    const cliente = await this.validarExisteId(id);
+    return cliente;
   }
 
   async update(id: string, updateClienteDto: UpdateClienteDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
-    const cliente = await this.clienteRepository.findById(id)
+    await this.validarExisteId(id);
 
-    if(!cliente) {
-      this.logger.error(`Cliente con id ${id} no existe`);
-      throw new InternalServerErrorException(`Cliente con id ${id} no existe`);
-    }
+    if (updateClienteDto.nombre) 
+      {await this.validarExisteNombre(updateClienteDto.nombre);}
 
     return this.clienteRepository.update(id, updateClienteDto)
   }
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`);
-    const cliente = await this.clienteRepository.findById(id)
+    await this.validarExisteId(id);
+    return this.clienteRepository.remove(id);
 
-    if (!cliente) {
-      this.logger.error(`Proyecto con id ${id} no existe`);
-      throw new InternalServerErrorException(`Proyecto con id ${id} no existe`);
-    }
-
-    return this.clienteRepository.remove(id)
-    
   }
 
+  private async validarExisteNombre(nombre: string): Promise<void> {
+    const existingCliente = await this.clienteRepository.findByName(nombre);
+    if (existingCliente) {
+      this.logger.error(`Cliente con nombre: ${nombre} ya existe`)
+      throw new InternalServerErrorException(`Cliente con nombre ${nombre} ya existe`)
+    }
+  }
+
+  private async validarExisteId(idCliente: string): Promise<Cliente> {
+    const cliente = await this.clienteRepository.findById(idCliente);
+    if (!cliente) {
+      this.logger.error(`Cliente con id: ${idCliente} no existe`)
+      throw new InternalServerErrorException(`Cliente con id ${idCliente} no existe`)
+    }
+
+    return cliente;
+  }
 }

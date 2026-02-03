@@ -26,6 +26,7 @@ export class ReclamoService {
   ) {}
 
   async create(createReclamoDto: CreateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
+    this.logger.log(`Creando nuevo ${this.ENTITY_NAME}`);
     const tipoReclamo = await this.tipoReclamoService.findById(createReclamoDto.tipoReclamoId)
     if (!tipoReclamo){
       this.logger.error(`TipoReclamo con id: ${createReclamoDto.tipoReclamoId} no existe`);
@@ -68,10 +69,12 @@ export class ReclamoService {
   }
 
   async findAll() {
+    this.logger.log(`Buscando todos los ${this.ENTITY_NAME}s`);
     return this.reclamoRepository.findAll();
   }
 
   async findOne(id: string) {
+    this.logger.log(`Buscando ${this.ENTITY_NAME} con id ${id}`);
     const reclamo = await this.reclamoRepository.findOne(id);
 
     if (!reclamo) {

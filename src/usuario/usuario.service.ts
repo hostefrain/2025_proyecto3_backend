@@ -11,7 +11,7 @@ import { UsuarioDocument } from './schema/usuario.schema';
 @Injectable()
 export class UsuarioService {
   private readonly logger = new Logger(UsuarioService.name);
-  private readonly ENTITY_NAME = 'Rol'
+  private readonly ENTITY_NAME = 'Usuario'
 
   constructor(
     private readonly rolService: RolService,

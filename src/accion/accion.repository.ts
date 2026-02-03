@@ -50,13 +50,11 @@ export class AccionRepository implements IAccionRepository {
         }
     }
 
-    async update(id: string, data: UpdateAccionDto, estadoActualId: string, areaOrigenId: string ): Promise<Accion | null> {
+    async update(id: string, data: UpdateAccionDto): Promise<Accion | null> {
         try {
             return this.accionModel.findByIdAndUpdate(id, 
                 {
                 ...data,
-                estadoActualId,
-                areaOrigenId,
             }, 
             { new: true }).exec();
         } catch (error) {

@@ -22,7 +22,7 @@ export class AreaRepository implements IAreaRepository{
             return createdArea.save();
         } catch (error) {
             this.logger.error(`Error creando area: ${error.message}`, error.stack);
-            throw new InternalServerErrorException('Error al crear area');
+            throw new InternalServerErrorException('Error al crear Area');
         }
     }
 
@@ -31,7 +31,7 @@ export class AreaRepository implements IAreaRepository{
             return this.areaModel.findById(id).exec();
         } catch (error) {
             this.logger.error(`Error buscando area con id ${id}: ${error.message}`, error.stack);
-            throw new InternalServerErrorException('Error al buscar area');
+            throw new InternalServerErrorException('Error al buscar Area');
         }
     }
 
@@ -39,8 +39,8 @@ export class AreaRepository implements IAreaRepository{
         try {
             return this.areaModel.findOne({ nombre }).exec();
         } catch (error) {
-            this.logger.error(`Error buscando area con nombre ${nombre}: ${error.message}`, error.stack);
-            throw new InternalServerErrorException('Error al buscar area');
+            this.logger.error(`Error buscando Area con nombre ${nombre}: ${error.message}`, error.stack);
+            throw new InternalServerErrorException('Error al buscar Area');
         }
     }
 
@@ -48,8 +48,8 @@ export class AreaRepository implements IAreaRepository{
         try {
             return this.areaModel.find().exec();
         } catch (error) {
-            this.logger.error(`Error buscando areas: ${error.message}`, error.stack);
-            throw new InternalServerErrorException('Error al buscar areas');
+            this.logger.error(`Error buscando Areas: ${error.message}`, error.stack);
+            throw new InternalServerErrorException('Error al buscar Areas');
         }
     }
 
@@ -57,8 +57,8 @@ export class AreaRepository implements IAreaRepository{
         try {
             return this.areaModel.findByIdAndUpdate(id, data, { new: true }).exec();
         } catch (error) {
-            this.logger.error(`Error actualizando area con id ${id}: ${error.message}`, error.stack);
-            throw new InternalServerErrorException('Error al actualizar area');
+            this.logger.error(`Error actualizando Area con id ${id}: ${error.message}`, error.stack);
+            throw new InternalServerErrorException('Error al actualizar Area');
         }
     }
 
@@ -67,7 +67,7 @@ export class AreaRepository implements IAreaRepository{
             await this.areaModel.findByIdAndDelete(id).exec();
         } catch (error) {
             this.logger.error(`Error eliminando area con id ${id}: ${error.message}`, error.stack);
-            throw new InternalServerErrorException('Error al eliminar area');
+            throw new InternalServerErrorException('Error al eliminar Area');
         }
     }
 }
