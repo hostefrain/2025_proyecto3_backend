@@ -1,17 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles, UseGuards } from '@nestjs/common';
 import { ReclamoService } from './reclamo.service';
 import { CreateReclamoDto } from './dto/create-reclamo.dto';
 import { UpdateReclamoDto } from './dto/update-reclamo.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { ApiConsumes, ApiBody, ApiTags } from '@nestjs/swagger';
 import { multerConfig } from '../config/multer.config'; // Importa la config
+import { JwtAuthGuard } from 'src/auth/jwt.guard';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
 
 @ApiTags('Reclamos')
 @Controller('reclamo')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class ReclamoController {
   constructor(private readonly reclamoService: ReclamoService) {}
 
   @Post()
+  @Roles('admin', 'user')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
     FileFieldsInterceptor(
@@ -40,16 +45,19 @@ export class ReclamoController {
   }
 
   @Get()
+  @Roles('admin', 'user')
   findAll() {
     return this.reclamoService.findAll();
   }
 
   @Get(':id')
+  @Roles('admin', 'user')
   findOne(@Param('id') id: string) {
     return this.reclamoService.findOne(id);
   }
 
   @Patch(':id')
+  @Roles('admin', 'user')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
     FileFieldsInterceptor(
@@ -78,6 +86,7 @@ export class ReclamoController {
   }
 
   @Delete(':id')
+  @Roles('admin', 'user')
   remove(@Param('id') id: string) {
     return this.reclamoService.remove(id);
   }
