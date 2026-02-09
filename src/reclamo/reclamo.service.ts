@@ -28,10 +28,18 @@ export class ReclamoService {
 
   async create(createReclamoDto: CreateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
     this.logger.log(`Creando nuevo ${this.ENTITY_NAME}`);
+
+    const estadoInicial = await this.estadoService.findByName('Nuevo');
+    
+    if (!estadoInicial) {
+      throw new NotFoundException('Estado inicial "Nuevo" no existe');
+    }
+
+    createReclamoDto.estadoId = estadoInicial.nombre.toString();
+
     this.verificarExistenciaTipoReclamo(createReclamoDto.tipoReclamoId);
     this.verificarExistenciaPrioridad(createReclamoDto.prioridadId);
     this.verificarExistenciaNivelCriticidad(createReclamoDto.nivelCriticidadId);
-    this.verificarExistenciaEstado(createReclamoDto.estadoId);
     this.verificarExistenciaArea(createReclamoDto.areaId);
     this.verificarExistenciaProyecto(createReclamoDto.proyectoId);
 

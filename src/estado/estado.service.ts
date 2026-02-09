@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common';
 import { CreateEstadoDto } from './dto/create-estado.dto';
 import { UpdateEstadoDto } from './dto/update-estado.dto';
 import type { IEstadoRepository } from './IEstadoRepository';
@@ -55,7 +55,7 @@ export class EstadoService {
     const existingTipoReclamo = await this.estadoRepository.findByName(nombre);
     if (existingTipoReclamo) {
       this.logger.warn(`El nombre ${nombre} ya existe en ${this.ENTITY_NAME}`);
-      throw new Error(`El nombre ${nombre} ya existe.`);
+      throw new BadRequestException(`El nombre ${nombre} ya existe.`);
     }
   }
 
@@ -64,7 +64,7 @@ export class EstadoService {
 
     if (!estado) {
       this.logger.warn(`${this.ENTITY_NAME} con id ${idEstado} no existe`);
-      throw new Error(`${this.ENTITY_NAME} con id ${idEstado} no existe`);
+      throw new BadRequestException(`${this.ENTITY_NAME} con id ${idEstado} no existe`);
     }
 
     return estado;
