@@ -17,6 +17,7 @@ import { RolModule } from './rol/rol.module';
 
 import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from './auth/auth.module';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { AuthModule } from './auth/auth.module';
     UsuarioModule,
     RolModule,
     AuthModule,
+    StatsModule,
   ],
 })
 export class AppModule {}
