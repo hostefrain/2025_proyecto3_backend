@@ -41,12 +41,28 @@ export class AccionService {
     await this.verificarExistenciaUsuario(responsableId);
     await this.verificarExistenciaEstado(estadoNuevoId);
   
-    return this.accionRepository.create(
+    // 1️⃣ Crear acción
+    const nuevaAccion = await this.accionRepository.create(
       createAccionDto,
       estadoActualId,
-      areaOrigenId,  
+      areaOrigenId,
     );
+
+    // 2️⃣ Actualizar estado del reclamo
+    await this.reclamoService.update(reclamoId, {
+      estadoId: estadoNuevoId,
+    });
+
+    return nuevaAccion;
   }
+
+  async findByReclamo(reclamoId: string) {
+  this.logger.log(`Buscando acciones del reclamo ${reclamoId}`);
+
+  await this.verificarExistenciaReclamo(reclamoId);
+
+  return this.accionRepository.findByReclamo(reclamoId);
+}
 
   async findAll() {
     this.logger.log(`Buscando todos los ${this.ENTITY_NAME}s`);

@@ -29,6 +29,12 @@ export class AccionController {
     return this.accionService.findOne(id);
   }
 
+  @Get('reclamo/:reclamoId')
+  @Roles('admin', 'user')
+  findByReclamo(@Param('reclamoId') reclamoId: string) {
+    return this.accionService.findByReclamo(reclamoId);
+  }
+
   @Patch(':id')
   @Roles('admin', 'user')
   update(@Param('id') id: string, @Body() updateAccionDto: UpdateAccionDto) {

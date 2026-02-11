@@ -35,6 +35,15 @@ export class AccionRepository implements IAccionRepository {
     }
   }
 
+  async findByReclamo(reclamoId: string) {
+    return this.accionModel
+      .find({ reclamoId })
+      .populate('areaDestinoId')
+      .populate('responsableId')
+      .populate('estadoNuevoId')
+      .sort({ createdAt: -1 });
+  }
+
   async findOne(id: string): Promise<Accion | null> {
     try {
       return this.accionModel.findById(id).exec();
