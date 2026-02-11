@@ -187,13 +187,15 @@ export class StatsService {
       { $unwind: '$cliente' },
       {
         $group: {
-          _id: '$cliente.nombre',
+          _id: '$cliente._id',
+          nombre: { $first: '$cliente.nombre' },
           total: { $sum: 1 },
         },
       },
       { $sort: { total: -1 } },
     ]);
   }
+
 
   // ========================
   // TIEMPO PROMEDIO DE RESOLUCIÓN (PRO)

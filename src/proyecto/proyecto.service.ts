@@ -56,7 +56,8 @@ export class ProyectoService {
       await this.verificarExistenciaNombre(updateProyectoDto.nombre);
     }
 
-    return this.proyectoRepository.update(id, updateProyectoDto);
+    return this.proyectoRepository.update(id, updateProyectoDto)
+    
   }
 
   async remove(id: string) {

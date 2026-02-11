@@ -9,6 +9,7 @@ import { EstadoService } from 'src/estado/estado.service';
 import { ProyectoService } from 'src/proyecto/proyecto.service';
 import { AreaService } from 'src/area/area.service';
 import { TipoReclamo } from 'src/tipo_reclamo/schema/tipo_reclamo.schema';
+import { EstadoDocument } from 'src/estado/schemas/estado.schema';
 
 @Injectable()
 export class ReclamoService {
@@ -29,13 +30,14 @@ export class ReclamoService {
   async create(createReclamoDto: CreateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
     this.logger.log(`Creando nuevo ${this.ENTITY_NAME}`);
 
-    const estadoInicial = await this.estadoService.findByName('Nuevo');
+    const estadoInicial = await this.estadoService.findByName('Nuevo') as EstadoDocument;
     
     if (!estadoInicial) {
       throw new NotFoundException('Estado inicial "Nuevo" no existe');
     }
 
-    createReclamoDto.estadoId = estadoInicial.nombre.toString();
+    createReclamoDto.estadoId = estadoInicial._id.toString();
+
 
     this.verificarExistenciaTipoReclamo(createReclamoDto.tipoReclamoId);
     this.verificarExistenciaPrioridad(createReclamoDto.prioridadId);
@@ -45,6 +47,7 @@ export class ReclamoService {
 
     const archivosPaths = archivos?.map(a => a.filename) ?? [];
     const imagenesPaths = imagenes?.map(i => i.filename) ?? [];
+    console.log(createReclamoDto);
 
     return this.reclamoRepository.create(createReclamoDto, archivosPaths, imagenesPaths)
   }
