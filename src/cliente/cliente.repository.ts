@@ -19,7 +19,7 @@ export class ClienteRepository implements IClienteRepository {
     async create(data: CreateClienteDto): Promise<Cliente> {
         try {
             const createdCliente = new this.clienteModel(data);
-            return createdCliente.save();          
+            return await createdCliente.save();          
         } catch(error) {
             this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
             throw new InternalServerErrorException('Error al crear el Cliente')
@@ -28,7 +28,7 @@ export class ClienteRepository implements IClienteRepository {
 
     async findById(id: string): Promise<Cliente | null> {
         try {
-            return this.clienteModel.findById(id).exec();
+            return await this.clienteModel.findById(id).exec();
         } catch(error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
             throw new InternalServerErrorException('Error al buscar el Cliente');
@@ -37,7 +37,7 @@ export class ClienteRepository implements IClienteRepository {
 
     async findByName(nombre: string): Promise<Cliente | null> {
         try {
-            return this.clienteModel.findOne({ nombre }).exec();
+            return await this.clienteModel.findOne({ nombre }).exec();
         } catch(error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
             throw new InternalServerErrorException('Error al buscar el Cliente');
@@ -46,7 +46,7 @@ export class ClienteRepository implements IClienteRepository {
         
     async findAll(): Promise<Cliente[]> {
         try {
-            return this.clienteModel.find().exec();
+            return await this.clienteModel.find().exec();
         } catch(error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
             throw new InternalServerErrorException('Error al buscar los Clientes');
@@ -55,7 +55,7 @@ export class ClienteRepository implements IClienteRepository {
 
     async update(id: string, data: Partial<UpdateClienteDto>): Promise<Cliente | null> {
         try {
-            return this.clienteModel.findByIdAndUpdate(id, data, { new: true }).exec();
+            return await this.clienteModel.findByIdAndUpdate(id, data, { new: true }).exec();
         } catch(error) {
             this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
             throw new InternalServerErrorException('Error al actualizar el Cliente');

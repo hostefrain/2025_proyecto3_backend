@@ -1,8 +1,7 @@
-import { Inject, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreatePrioridadDto } from './dto/create-prioridad.dto';
 import { UpdatePrioridadDto } from './dto/update-prioridad.dto';
 import type { IPrioridadRepository } from './IPrioridadRepository';
-import { normalize } from 'path';
 
 @Injectable()
 export class PrioridadService {
@@ -17,7 +16,7 @@ export class PrioridadService {
   async create(createPrioridadDto: CreatePrioridadDto) {
     this.logger.log(`Creando un nuevo ${this.ENTITY_NAME} con nombre: ${createPrioridadDto.nombre}`, );
 
-    this.verificarExistenciaNombre(createPrioridadDto.nombre);
+    await this.verificarExistenciaNombre(createPrioridadDto.nombre);
 
     return this.prioridadRepository.create(createPrioridadDto);
   }
@@ -40,13 +39,13 @@ export class PrioridadService {
 
   async update(id: string, updatePrioridadDto: UpdatePrioridadDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`, );
-    this.verificarExistenciaPrioridad(id);
+    await this.verificarExistenciaPrioridad(id);
     return this.prioridadRepository.update(id, updatePrioridadDto);
   }
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`, );
-    this.verificarExistenciaPrioridad(id);
+    await this.verificarExistenciaPrioridad(id);
     return this.prioridadRepository.remove(id);
   }
 

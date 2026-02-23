@@ -19,7 +19,7 @@ export class AreaRepository implements IAreaRepository{
     async create(data: CreateAreaDto): Promise<Area> {
         try {
             const createdArea = new this.areaModel(data);
-            return createdArea.save();
+            return await createdArea.save();
         } catch (error) {
             this.logger.error(`Error creando area: ${error.message}`, error.stack);
             throw new InternalServerErrorException('Error al crear Area');
@@ -28,7 +28,7 @@ export class AreaRepository implements IAreaRepository{
 
     async findOne(id: string): Promise<Area | null> {
         try {
-            return this.areaModel.findById(id).exec();
+            return await this.areaModel.findById(id).exec();
         } catch (error) {
             this.logger.error(`Error buscando area con id ${id}: ${error.message}`, error.stack);
             throw new InternalServerErrorException('Error al buscar Area');
@@ -37,7 +37,7 @@ export class AreaRepository implements IAreaRepository{
 
     async findByName(nombre: string): Promise<Area | null> {
         try {
-            return this.areaModel.findOne({ nombre }).exec();
+            return await this.areaModel.findOne({ nombre }).exec();
         } catch (error) {
             this.logger.error(`Error buscando Area con nombre ${nombre}: ${error.message}`, error.stack);
             throw new InternalServerErrorException('Error al buscar Area');
@@ -46,7 +46,7 @@ export class AreaRepository implements IAreaRepository{
 
     async findAll(): Promise<Area[]> {
         try {
-            return this.areaModel.find().exec();
+            return await this.areaModel.find().exec();
         } catch (error) {
             this.logger.error(`Error buscando Areas: ${error.message}`, error.stack);
             throw new InternalServerErrorException('Error al buscar Areas');
@@ -55,7 +55,7 @@ export class AreaRepository implements IAreaRepository{
 
     async update(id: string, data: UpdateAreaDto): Promise<Area | null> {
         try {
-            return this.areaModel.findByIdAndUpdate(id, data, { new: true }).exec();
+            return await this.areaModel.findByIdAndUpdate(id, data, { new: true }).exec();
         } catch (error) {
             this.logger.error(`Error actualizando Area con id ${id}: ${error.message}`, error.stack);
             throw new InternalServerErrorException('Error al actualizar Area');

@@ -1,15 +1,10 @@
-import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { CreateAccionDto } from './dto/create-accion.dto';
 import { UpdateAccionDto } from './dto/update-accion.dto';
 import type { IAccionRepository } from './IAccionRepository';
-import { ReclamoService } from 'src/reclamo/reclamo.service';
-import { UsuarioService } from 'src/usuario/usuario.service';
-import { Reclamo } from 'src/reclamo/schemas/reclamo.schema';
-import { AreaService } from 'src/area/area.service';
-import { EstadoService } from 'src/estado/estado.service';
-import { Usuario } from 'src/usuario/schema/usuario.schema';
-import { Area } from 'src/area/schemas/area.schema';
-import { Estado } from 'src/estado/schemas/estado.schema';
+import { ReclamoService } from '../reclamo/reclamo.service';
+import { AccionValidator } from './accion.validator';
+import { AccionMapper } from './mapper/accion.mapper';
 
 @Injectable()
 export class AccionService {
@@ -17,52 +12,32 @@ export class AccionService {
   private readonly ENTITY_NAME = 'Accion';
 
   constructor(
+    private readonly accionValidator: AccionValidator,
     private readonly reclamoService: ReclamoService,
-    private readonly usuarioService: UsuarioService,
-    private readonly areaService: AreaService,
-    private readonly estadoService: EstadoService,
     @Inject('IAccionRepository') 
     private readonly accionRepository: IAccionRepository,
   ) {}
 
   async create(createAccionDto: CreateAccionDto) {
     this.logger.log(`Creando una nueva ${this.ENTITY_NAME}`);
-    const {reclamoId, areaDestinoId, responsableId, estadoNuevoId} = createAccionDto;
 
-    const reclamoEntity = await this.verificarExistenciaReclamo(reclamoId);
-    
-    const estadoActualId = reclamoEntity.estadoId.toString();
-    const areaOrigenId = reclamoEntity.areaId.toString();
+    const { estadoActualId, areaOrigenId } =
+      await this.accionValidator.validarCreate(createAccionDto);
 
-    await this.verificarExistenciaArea(areaOrigenId);
-    await this.verificarExistenciaEstado(estadoActualId);
-
-    await this.verificarExistenciaArea(areaDestinoId);
-    await this.verificarExistenciaUsuario(responsableId);
-    await this.verificarExistenciaEstado(estadoNuevoId);
-  
-    // 1️⃣ Crear acción
-    const nuevaAccion = await this.accionRepository.create(
+    const accionPersistence = AccionMapper.toPersistence(
       createAccionDto,
       estadoActualId,
       areaOrigenId,
     );
 
-    // 2️⃣ Actualizar estado del reclamo
-    await this.reclamoService.update(reclamoId, {
-      estadoId: estadoNuevoId,
+    const nuevaAccion = await this.accionRepository.create(accionPersistence);
+
+    await this.reclamoService.update(createAccionDto.reclamoId, {
+      estadoId: createAccionDto.estadoNuevoId,
     });
 
     return nuevaAccion;
   }
-
-  async findByReclamo(reclamoId: string) {
-  this.logger.log(`Buscando acciones del reclamo ${reclamoId}`);
-
-  await this.verificarExistenciaReclamo(reclamoId);
-
-  return this.accionRepository.findByReclamo(reclamoId);
-}
 
   async findAll() {
     this.logger.log(`Buscando todos los ${this.ENTITY_NAME}s`);
@@ -74,92 +49,18 @@ export class AccionService {
     return this.accionRepository.findOne(id);
   }
 
-async update(id: string, updateAccionDto: UpdateAccionDto) {
-  this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`);
+  async update(id: string, updateDto: UpdateAccionDto) {
+    this.logger.log(`Actualizando ${this.ENTITY_NAME} con id: ${id}`);
 
-  this.verificarExistenciaAccion(id);
+    await this.accionValidator.validarUpdate(id, updateDto);
 
-  if (updateAccionDto.reclamoId) {
-    const reclamo = await this.verificarExistenciaReclamo(updateAccionDto.reclamoId);
-
-    const estadoActualId = reclamo.estadoId.toString();
-    const areaOrigenId = reclamo.areaId.toString();
-
-    await this.verificarExistenciaArea(areaOrigenId);
-    await this.verificarExistenciaEstado(estadoActualId);
+    return this.accionRepository.update(id, updateDto);
   }
-
-  if (updateAccionDto.areaDestinoId) {
-    await this.verificarExistenciaArea(updateAccionDto.areaDestinoId);
-  }
-
-  if (updateAccionDto.estadoNuevoId) {
-    await this.verificarExistenciaEstado(updateAccionDto.estadoNuevoId);
-  }
-
-  if (updateAccionDto.responsableId) {
-    await this.verificarExistenciaUsuario(updateAccionDto.responsableId);
-  }
-
-  return this.accionRepository.update(id, updateAccionDto);
-}
 
 
   async remove(id: string) {
     this.logger.log(`Eliminando ${this.ENTITY_NAME} con id ${id}`);
-    this.verificarExistenciaAccion(id);
+    await this.accionValidator.validarRemove(id);
     return this.accionRepository.remove(id);
-  }
-
-  private verificarExistenciaReclamo(reclamoId: string): Promise<Reclamo> {
-    const reclamo = this.reclamoService.findOne(reclamoId)
-
-    if (!reclamo) {
-      this.logger.error(`Reclamo con id: ${reclamoId} no existe`);
-      throw new NotFoundException(`No existe un Reclamo con id: ${reclamoId}`);
-      }
-
-    return reclamo;
-  }
-
-  private async verificarExistenciaUsuario(usuarioId: string): Promise<Usuario> {
-    const usuario = await this.usuarioService.findOne(usuarioId)
-
-    if (!usuario) {
-      this.logger.error(`Usuario con id: ${usuarioId} no existe`);
-      throw new NotFoundException(`No existe un Usuario con id: ${usuarioId}`);
-      }
-
-    return usuario;
-  }
-
-  private async verificarExistenciaArea(areaId: string): Promise<Area> {
-    const area = await this.areaService.findOne(areaId)
-
-    if (!area) {
-      this.logger.error(`Area con id: ${areaId} no existe`);
-      throw new NotFoundException(`No existe un Area con id: ${areaId}`);
-      }
-
-    return area;
-  }
-
-  private async verificarExistenciaEstado(estadoId: string): Promise<Estado> {
-    const estado = await this.estadoService.findById(estadoId)
-    if (!estado) {
-      this.logger.error(`Estado con id: ${estadoId} no existe`);
-      throw new NotFoundException(`No existe un Estado con id: ${estadoId}`);
-      }
-
-    return estado;
-  }
-
-  private async verificarExistenciaAccion(idAccion: string) : Promise<any> {
-    const accion = await this.accionRepository.findOne(idAccion);
-    if (!accion) {
-      this.logger.error(`El id ${idAccion} no existe en ${this.ENTITY_NAME}`);
-      throw new NotFoundException(`El id ${idAccion} no existe.`);
-    }
-    return accion;
   }
 }

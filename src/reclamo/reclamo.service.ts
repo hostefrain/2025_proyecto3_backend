@@ -2,14 +2,13 @@ import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateReclamoDto } from './dto/create-reclamo.dto';
 import { UpdateReclamoDto } from './dto/update-reclamo.dto';
 import type { IReclamoRepository } from './IReclamoRepository';
-import { TipoReclamoService } from 'src/tipo_reclamo/tipo_reclamo.service';
-import { PrioridadService } from 'src/prioridad/prioridad.service';
-import { NivelCriticidadService } from 'src/nivel_criticidad/nivel_criticidad.service';
-import { EstadoService } from 'src/estado/estado.service';
-import { ProyectoService } from 'src/proyecto/proyecto.service';
-import { AreaService } from 'src/area/area.service';
-import { TipoReclamo } from 'src/tipo_reclamo/schema/tipo_reclamo.schema';
-import { EstadoDocument } from 'src/estado/schemas/estado.schema';
+import { TipoReclamoService } from '../tipo_reclamo/tipo_reclamo.service';
+import { PrioridadService } from '../prioridad/prioridad.service';
+import { NivelCriticidadService } from '../nivel_criticidad/nivel_criticidad.service';
+import { EstadoService } from '../estado/estado.service';
+import { ProyectoService } from '../proyecto/proyecto.service';
+import { AreaService } from '../area/area.service';
+import { EstadoDocument } from '../estado/schemas/estado.schema';
 
 @Injectable()
 export class ReclamoService {
@@ -70,7 +69,7 @@ export class ReclamoService {
 
   async update(id: string, dto: UpdateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
-    this.verificarExistenciaReclamo(id)
+    await this.verificarExistenciaReclamo(id)
     const archivosPaths = archivos?.map(a => a.filename) ?? [];
     const imagenesPaths = imagenes?.map(i => i.filename) ?? [];
 

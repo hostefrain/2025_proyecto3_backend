@@ -1,10 +1,10 @@
-import { Inject, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 import type { IProyectoRepository } from './IProyectoRepository';
-import { TipoProyectoService } from 'src/tipo_proyecto/tipo_proyecto.service';
-import { ClienteService } from 'src/cliente/cliente.service';
-import { TipoProyecto } from 'src/tipo_proyecto/schema/tipo_proyecto.schema';
+import { TipoProyectoService } from '../tipo_proyecto/tipo_proyecto.service';
+import { ClienteService } from '../cliente/cliente.service';
+import { TipoProyecto } from '../tipo_proyecto/schema/tipo_proyecto.schema';
 
 @Injectable()
 export class ProyectoService {
@@ -42,7 +42,7 @@ export class ProyectoService {
   async update(id: string, updateProyectoDto: UpdateProyectoDto) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
 
-    this.verificarExistenciaProyecto(id);
+    await this.verificarExistenciaProyecto(id);
 
     if (updateProyectoDto.tipoProyectoId) {
       await this.verificarExistenciaTipoProyecto(updateProyectoDto.tipoProyectoId);

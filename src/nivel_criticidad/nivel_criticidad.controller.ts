@@ -2,9 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { NivelCriticidadService } from './nivel_criticidad.service';
 import { CreateNivelCriticidadDto } from './dto/create-nivel_criticidad.dto';
 import { UpdateNivelCriticidadDto } from './dto/update-nivel_criticidad.dto';
-import { JwtAuthGuard } from 'src/auth/jwt.guard';
-import { RolesGuard } from 'src/auth/roles.guard';
-import { Roles } from 'src/auth/roles.decorator';
+import { JwtAuthGuard } from '../auth/jwt.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
 
 @Controller('nivel-criticidad')
 @UseGuards(JwtAuthGuard, RolesGuard)

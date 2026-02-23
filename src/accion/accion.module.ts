@@ -8,6 +8,7 @@ import { AreaModule } from 'src/area/area.module';
 import { ReclamoModule } from 'src/reclamo/reclamo.module';
 import { EstadoModule } from 'src/estado/estado.module';
 import { UsuarioModule } from 'src/usuario/usuario.module';
+import { AccionValidator } from './accion.validator';
 
 
 @Module({
@@ -22,6 +23,7 @@ import { UsuarioModule } from 'src/usuario/usuario.module';
   controllers: [AccionController],
   providers: [
     AccionService,
+    AccionValidator,
     {
       provide: 'IAccionRepository',
       useClass: AccionRepository,

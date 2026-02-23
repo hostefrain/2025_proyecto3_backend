@@ -4,8 +4,8 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import type { IUsuarioRepository } from './IUsuarioRepository';
 
 import * as bcrypt from 'bcrypt';
-import { RolService } from 'src/rol/rol.service';
-import { AreaService } from 'src/area/area.service';
+import { RolService } from '../rol/rol.service';
+import { AreaService } from '../area/area.service';
 import { UsuarioDocument } from './schema/usuario.schema';
 
 @Injectable()

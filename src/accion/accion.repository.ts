@@ -4,7 +4,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { IAccionRepository } from "./IAccionRepository";
 import { Model, Types } from "mongoose";
 import { UpdateAccionDto } from "./dto/update-accion.dto";
-import { CreateAccionDto } from "./dto/create-accion.dto";
+import { AccionCreate } from "./types/accion.types";
 
 @Injectable()
 export class AccionRepository implements IAccionRepository {
@@ -16,19 +16,12 @@ export class AccionRepository implements IAccionRepository {
     private readonly accionModel: Model<AccionDocument>,
   ) {}
 
-  async create(
-    data: CreateAccionDto,
-    areaOrigenId: string,
-    estadoActualId: string,
-  ): Promise<Accion> {
+  async create(data: AccionCreate ): Promise<Accion> {
     try {
-      const createdAccion = new this.accionModel({
-        ...data,
-        areaOrigenId: new Types.ObjectId(areaOrigenId),
-        estadoActualId: new Types.ObjectId(estadoActualId),
-      });
-
+      
+      const createdAccion = new this.accionModel(data);
       return await createdAccion.save();
+
     } catch (error) {
       this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
       throw new InternalServerErrorException('Error al crear la Acción');

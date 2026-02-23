@@ -2,9 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { AccionService } from './accion.service';
 import { CreateAccionDto } from './dto/create-accion.dto';
 import { UpdateAccionDto } from './dto/update-accion.dto';
-import { JwtAuthGuard } from 'src/auth/jwt.guard';
-import { RolesGuard } from 'src/auth/roles.guard';
-import { Roles } from 'src/auth/roles.decorator';
+import { JwtAuthGuard } from '../auth/jwt.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
 
 @Controller('accion')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -27,12 +27,6 @@ export class AccionController {
   @Roles('admin', 'user')
   findOne(@Param('id') id: string) {
     return this.accionService.findOne(id);
-  }
-
-  @Get('reclamo/:reclamoId')
-  @Roles('admin', 'user')
-  findByReclamo(@Param('reclamoId') reclamoId: string) {
-    return this.accionService.findByReclamo(reclamoId);
   }
 
   @Patch(':id')

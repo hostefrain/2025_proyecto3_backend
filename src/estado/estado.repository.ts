@@ -18,7 +18,7 @@ export class EstadoRepository implements IEstadoRepository {
     async create(data: CreateEstadoDto): Promise<Estado> {
         try {
             const createdEstado = new this.estadoModel(data);
-            return createdEstado.save();
+            return await createdEstado.save();
         } catch (error) {
             this.logger.error(`Error al crear ${this.ENTITY_NAME}: ${error.message}`);
             throw new InternalServerErrorException('Error al crear el Estado');
@@ -27,7 +27,7 @@ export class EstadoRepository implements IEstadoRepository {
     
     async findByName(nombre: string): Promise<Estado | null> {
         try {
-            return this.estadoModel.findOne({ nombre }).exec();
+            return await this.estadoModel.findOne({ nombre }).exec();
         } catch (error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME} con nombre ${nombre}: ${error.message}`);
             throw new InternalServerErrorException('Error al buscar el Estado');
@@ -36,7 +36,7 @@ export class EstadoRepository implements IEstadoRepository {
 
     async findById(id: string): Promise<Estado | null> {
         try {
-            return this.estadoModel.findById(id).exec();
+            return await this.estadoModel.findById(id).exec();
         } catch (error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`);
             throw new InternalServerErrorException('Error al buscar el Estado');
@@ -45,7 +45,7 @@ export class EstadoRepository implements IEstadoRepository {
 
     async findAll(): Promise<Estado[]> {
         try {
-            return this.estadoModel.find().exec();
+            return await this.estadoModel.find().exec();
         } catch (error) {
             this.logger.error(`Error al buscar ${this.ENTITY_NAME}s: ${error.message}`);
             throw new InternalServerErrorException('Error al buscar los Estados');
@@ -54,7 +54,7 @@ export class EstadoRepository implements IEstadoRepository {
 
     async update(id: string, data: Partial<Estado>): Promise<Estado | null> {
         try {
-            return this.estadoModel.findByIdAndUpdate(id, data, { new: true }).exec();
+            return await this.estadoModel.findByIdAndUpdate(id, data, { new: true }).exec();
         } catch (error) {
             this.logger.error(`Error al actualizar ${this.ENTITY_NAME} con id: ${id}: ${error.message}`);
             throw new InternalServerErrorException('Error al actualizar el Estado');
