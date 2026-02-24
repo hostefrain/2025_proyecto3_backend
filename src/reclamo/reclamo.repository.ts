@@ -43,7 +43,11 @@ export class ReclamoRepository implements IReclamoRepository {
 
   async findOne(id: string): Promise<Reclamo | null> {
     try {
-      return this.reclamoModel.findById(id).exec();
+      return this.reclamoModel
+      .findById(id)
+      .populate('proyectoId')
+      .populate('estadoId')
+      .exec();
     } catch (error) {
       this.logger.error(
         `Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`,
@@ -54,7 +58,11 @@ export class ReclamoRepository implements IReclamoRepository {
 
   async findAll(): Promise<Reclamo[]> {
     try {
-      return this.reclamoModel.find().exec();
+      return this.reclamoModel
+      .find()
+      .populate('proyectoId')
+      .populate('estadoId')
+      .exec();
     } catch (error) {
       this.logger.error(
         `Error al buscar ${this.ENTITY_NAME}s: ${error.message}`,
