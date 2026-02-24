@@ -39,6 +39,15 @@ export class AccionService {
     return nuevaAccion;
   }
 
+  async findByReclamo(reclamoId: string) {
+    this.logger.log('Buscando acciones del reclamo ${reclamoId}');
+
+    // Validar que el reclamo exista
+    await this.accionValidator.validarFindByReclamo(reclamoId);
+
+    return this.accionRepository.findByReclamo(reclamoId);
+  }
+
   async findAll() {
     this.logger.log(`Buscando todos los ${this.ENTITY_NAME}s`);
     return this.accionRepository.findAll();

@@ -83,6 +83,10 @@ export class AccionValidator {
     await this.verificarExistenciaAccion(id);
   }
 
+  async validarFindByReclamo(reclamoId: string) {
+    await this.verificarExistenciaReclamo(reclamoId);
+  }
+
   private async verificarExistenciaReclamo(
     reclamoId: string,
   ): Promise<Reclamo> {

@@ -8,5 +8,6 @@ export interface IAccionRepository {
     findAll(): Promise<Accion[]>;
     update(id: string, data: UpdateAccionDto): Promise<Accion | null>;
     remove(id: string): Promise<void>;
+    findByReclamo(reclamoId: string): Promise<any[]>;
 }
 
