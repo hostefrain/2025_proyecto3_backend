@@ -32,7 +32,13 @@ export class AccionValidator {
     const { reclamoId, areaDestinoId, responsableId, estadoNuevoId } =
       createAccionDto;
 
-    const reclamo = await this.verificarExistenciaReclamo(reclamoId);
+    const reclamo = await this.reclamoService.findOneRaw(reclamoId);
+
+    if (!reclamo) {
+      throw new NotFoundException(
+        `No existe un Reclamo con id: ${reclamoId}`,
+      );
+    }
 
     const estadoActualId = reclamo.estadoId.toString();
     const areaOrigenId = reclamo.areaId.toString();

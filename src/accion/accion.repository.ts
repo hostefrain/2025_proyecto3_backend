@@ -30,7 +30,7 @@ export class AccionRepository implements IAccionRepository {
 
   async findByReclamo(reclamoId: string) {
     return this.accionModel
-      .find({ reclamoId })
+      .find({ reclamoId: new Types.ObjectId(reclamoId) })
       .populate('areaDestinoId')
       .populate('responsableId')
       .populate('estadoNuevoId')

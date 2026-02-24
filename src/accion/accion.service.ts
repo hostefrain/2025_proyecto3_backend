@@ -40,7 +40,7 @@ export class AccionService {
   }
 
   async findByReclamo(reclamoId: string) {
-    this.logger.log('Buscando acciones del reclamo ${reclamoId}');
+    this.logger.log(`Buscando acciones del reclamo ${reclamoId}`);
 
     // Validar que el reclamo exista
     await this.accionValidator.validarFindByReclamo(reclamoId);

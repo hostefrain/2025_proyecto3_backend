@@ -56,6 +56,18 @@ export class ReclamoRepository implements IReclamoRepository {
     }
   }
 
+  // Para eliminar el uso del metodo que trae populate
+  async findOneRaw(id: string): Promise<Reclamo | null> {
+    try {
+      return this.reclamoModel.findById(id).exec();
+    } catch (error) {
+      this.logger.error(
+        `Error al buscar ${this.ENTITY_NAME} con id ${id}: ${error.message}`,
+      );
+      throw new InternalServerErrorException('Error al buscar el Reclamo');
+    }
+  }
+
   async findAll(): Promise<Reclamo[]> {
     try {
       return this.reclamoModel

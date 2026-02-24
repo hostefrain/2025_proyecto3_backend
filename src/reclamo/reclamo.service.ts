@@ -67,6 +67,10 @@ export class ReclamoService {
     return reclamo;
   }
 
+  async findOneRaw(id: string) {
+    return this.reclamoRepository.findOneRaw(id);
+  }
+
   async update(id: string, dto: UpdateReclamoDto, archivos?: Express.Multer.File[], imagenes?: Express.Multer.File[]) {
     this.logger.log(`Actualizando ${this.ENTITY_NAME} con id ${id}`);
     await this.verificarExistenciaReclamo(id)
